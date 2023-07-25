@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,12 +23,27 @@ class RegisterController extends Controller
         else
             $position = $request->input("position");
 
+        try{
 
-
-        $result = DB::statement("insert into registers(r_fname,r_lname,r_year,r_mobile,r_scnum,r_email,r_workplace,r_role,r_position)
+            $result = DB::statement("insert into registers(r_fname,r_lname,r_year,r_mobile,r_scnum,r_email,r_workplace,r_role,r_position)
                                  values(?,?,?,?,?,?,?,?,?)",
                                 [$fname,$lname,$year,$mobile,$scnum,$email,$workplace,$role,$position]);
+            return view('register_success');
 
-        return "$result";
+        }catch(QueryException $e){
+            // sc is sc number
+            $sc = DB::select("select r_scnum from registers");
+            foreach($sc as $x){
+                if($x->r_scnum==$scnum)
+                    echo "Duplicate scnum $scnum <br>";
+            }
+            // em is email
+            $em = DB::select("select r_email from registers");
+            foreach($em as $x){
+                if($x->r_email==$email)
+                    echo "Duplicate email $email <br>";
+            }
+        }
+
     }
 }

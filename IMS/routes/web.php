@@ -23,3 +23,4 @@ Route::get('/register', function () {
 });
 
 Route::post('/register-submit',[RegisterController::class,'register']);
+
