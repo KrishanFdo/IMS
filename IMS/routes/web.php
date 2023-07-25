@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\RegisterController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +21,5 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('register');
 });
+
+Route::post('/register-submit',[RegisterController::class,'register']);

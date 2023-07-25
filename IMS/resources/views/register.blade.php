@@ -33,7 +33,7 @@
 
           <div class="dashboard-content ms-5 px-3 pt-4">
             <div class="container">
-              <form class="form-group" action="" method="POST" enctype='multipart/form-data'>
+              <form class="form-group" action="<?=url('/register-submit')?>" method="POST" enctype='multipart/form-data'>
 
                 <div class="row jumbotron">
                   <div class="col-sm-6 mb-4">
@@ -80,8 +80,8 @@
                   <div class="col-sm-6 mb-4">
 
                     <label class="mt-2"></label>
-                    <select class="form-select" aria-label="" name="catagory">
-                      <option selected>Work Status Now</option>
+                    <select class="form-select" aria-label="" name="position">
+                      <option selected>Position</option>
                       <option value="Software Developer">Software Developer</option>
                       <option value="UX Designer">UX Designer</option>
                       <option value="Mobile App Developer">Mobile App Developer</option>
@@ -109,8 +109,8 @@
 
                       <div class="col-sm-6 mb-4">
                             <div class="col-sm-6 mb-4">
-                              <label>if other position</label>
-                              <input type="text" class="form-control" placeholder="Position" name="position" >
+                              <label>Other Position</label>
+                              <input type="text" class="form-control" placeholder="Position" name="other-position" >
                              <br>
                              </div>
                         </div>
@@ -129,8 +129,8 @@
                   <div class="col-sm-6 mb-4" style=" text-align: right;">
                   <label></label>
                   <div>
-
-                    <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-md col-sm-4">
+                    <input type="hidden" name="_token" value="<?=csrf_token()?>">
+                    <input type="submit" value="Submit" class="btn btn-primary btn-md col-sm-4">
                 </div>
                   </div>
 
