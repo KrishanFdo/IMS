@@ -51,9 +51,10 @@ a:hover, a:active {
 
                      </div>
                      </div>
-                     </div><div class="text-center">
-                        <img src="./../site-images/bg-register-success.jpg" class="rounded" alt="..."  style="width:60%">
-                        </div>
+                     </div>
+                    <div class="text-center">
+                        <img src="{{ URL::asset('site-images/bg-register-success.jpg') }}" class="rounded" alt="..."  style="width:60%">
+                    </div>
                      <div>
 
 
