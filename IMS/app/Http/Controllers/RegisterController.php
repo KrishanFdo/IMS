@@ -27,7 +27,7 @@ class RegisterController extends Controller
             'email' => 'required|email|unique:registers,r_email',
             'fname'=>'required',
             'lname'=>'required',
-            'year'=>'required',
+            'year'=>'required|numeric|digits:4',
             'mobile'=>'required',
             "scnum"=>'required|scnumber|unique:registers,r_scnum',
             'workplace'=>'required',

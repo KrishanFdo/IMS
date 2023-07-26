@@ -53,6 +53,9 @@
                   <div class="col-sm-6 mb-4">
                     <label>Year</label>
                     <input type="text" class="form-control " placeholder="****" name="year">
+                    @error('year')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="col-sm-6 mb-4">
                     <label> Phone number </label>
