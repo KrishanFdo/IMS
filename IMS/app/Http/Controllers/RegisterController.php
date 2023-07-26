@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Register;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -49,10 +50,20 @@ class RegisterController extends Controller
         else
             $position = $request->input("position");
 
-
-        $result = DB::statement("insert into registers(r_fname,r_lname,r_year,r_mobile,r_scnum,r_email,r_workplace,r_role,r_position)
+        $registers = new Register();
+        $registers->r_fname = $fname;
+        $registers->r_lname = $lname;
+        $registers->r_year = $year;
+        $registers->r_mobile = $mobile;
+        $registers->r_scnum = $scnum;
+        $registers->r_email = $email;
+        $registers->r_workplace = $workplace;
+        $registers->r_role = $role;
+        $registers->r_position = $position;
+        $registers->save();
+        /*$result = DB::statement("insert into registers(r_fname,r_lname,r_year,r_mobile,r_scnum,r_email,r_workplace,r_role,r_position)
                                  values(?,?,?,?,?,?,?,?,?)",
-                                [$fname,$lname,$year,$mobile,$scnum,$email,$workplace,$role,$position]);
+                                [$fname,$lname,$year,$mobile,$scnum,$email,$workplace,$role,$position]);*/
         return redirect()->back()->with('success', 'Registered successfully!');
 
 

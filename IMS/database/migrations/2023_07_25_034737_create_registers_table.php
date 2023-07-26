@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('r_workplace',25);
             $table->string('r_role',5);
             $table->string('r_position',50);
+            $table->timestamps();
 
         });
     }
