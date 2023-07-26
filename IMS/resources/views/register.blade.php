@@ -18,24 +18,16 @@
 
   <div >
     <div>
-      <div>
-        <h1 class="fs-8 ms-6 name"><span class="text" >Department Of Computer Science  - Univesity Of Ruhuna </span></h1>
+      <div class =text-align: right;> 
+        <h1 class="fs-8 ms-6 name" ><span class="text" >Department Of Computer Science  - Univesity Of Ruhuna </span></h1>
       </div>
 
-
+      
 
     </div>
-    <div class="content">
-      <nav class="navbar navbar-expand-md py-3 navbar-light bg-light ">
-        </nav>
-      <div class="dashboard-content ms-5 px-3 pt-4">
-        <div class="container mt-3 ms-2">
+              <form class="form-group" action="" method="POST" enctype='multipart/form-data'>
 
-          <div class="dashboard-content ms-5 px-3 pt-4">
-            <div class="container">
-              <form class="form-group" action="<?=url('/register-submit')?>" method="POST" enctype='multipart/form-data'>
-
-                <div class="row jumbotron">
+                <div>
                   <div class="col-sm-6 mb-4">
                     <label>First Name</label>
                     <input type="text" class="form-control " name="fname">
@@ -70,9 +62,9 @@
                   <div class="col-sm-6 mb-4">
                   <div class="col-sm-6 mb-4">
                           <label>Role</label>  <br>
-                    <div>   <input type="radio" id="role" name="role" value="bcs"/> BCS
+                    <div>   <input type="radio" id="role" name="role" value="bcs"/> BCS  
                           <br>
-                            <input type="radio" id="role" name="role" value="bsc"/> BSC <br/>
+                            <input type="radio" id="role" name="role" value="bsc"/> BSC <br/> 
                     </div>
                   </div>
                 </div>
@@ -80,8 +72,8 @@
                   <div class="col-sm-6 mb-4">
 
                     <label class="mt-2"></label>
-                    <select class="form-select" aria-label="" name="position">
-                      <option selected>Position</option>
+                    <select class="form-select" aria-label="" name="catagory">
+                      <option selected>Work Status Now</option>
                       <option value="Software Developer">Software Developer</option>
                       <option value="UX Designer">UX Designer</option>
                       <option value="Mobile App Developer">Mobile App Developer</option>
@@ -109,8 +101,8 @@
 
                       <div class="col-sm-6 mb-4">
                             <div class="col-sm-6 mb-4">
-                              <label>Other Position</label>
-                              <input type="text" class="form-control" placeholder="Position" name="other-position" >
+                              <label>if other position</label>
+                              <input type="text" class="form-control" placeholder="Position" name="position" >
                              <br>
                              </div>
                         </div>
@@ -123,24 +115,24 @@
                       </div>
                   </div>
 
-
+                    
 
 
                   <div class="col-sm-6 mb-4" style=" text-align: right;">
                   <label></label>
                   <div>
-                    <input type="hidden" name="_token" value="<?=csrf_token()?>">
-                    <input type="submit" value="Submit" class="btn btn-primary btn-md col-sm-4">
+
+                    <input type="submit" name="submit" value="Submit" class="btn btn-primary btn-md col-sm-4">
                 </div>
                   </div>
 
                 </div>
 
               </form>
-            </div>
+            
           </div>
         </div>
 
 </body>
 
-</html>
+</html>  
