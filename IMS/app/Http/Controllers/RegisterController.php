@@ -6,6 +6,8 @@ use App\Models\Register;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -20,20 +22,32 @@ class RegisterController extends Controller
         });
 
         Validator::replacer('scnumber', function ($message, $attribute, $rule, $parameters) {
-            return str_replace(':attribute', $attribute, 'Invalid format. It should be in the format "SC/YYYY/NNNNN".');
+            return str_replace(':attribute', $attribute, 'Invalid format. Correct format is "SC/YYYY/NNNNN".');
+        });
+
+        Validator::extend('mobile', function ($attribute, $value, $parameters, $validator) {
+            // Define the pattern for the custom code (SC/Year/Digits)
+            $pattern = '/^\+94\d{9}$/';
+
+            // Use preg_match to check if the value matches the pattern
+            return preg_match($pattern, $value) === 1;
+        });
+
+        Validator::replacer('mobile', function ($message, $attribute, $rule, $parameters) {
+            return str_replace(':attribute', $attribute, 'Invalid format. Correct format is "+94XXXXXXXXX".');
         });
 
         $request->validate([
-            //'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the validation rules as per your requirements.
-            'email' => 'required|email|unique:registers,r_email',
             'fname'=>'required',
             'lname'=>'required',
             'year'=>'required|numeric|digits:4',
-            'mobile'=>'required',
+            'mobile'=>'required|mobile',
             "scnum"=>'required|scnumber|unique:registers,r_scnum',
+            'email' => 'required|email|unique:registers,r_email',
             'workplace'=>'required',
             'role'=>'required',
-            'position'=>'required'
+            'position'=>'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $fname = $request->input("fname");
@@ -50,6 +64,14 @@ class RegisterController extends Controller
         else
             $position = $request->input("position");
 
+        $image = $request->file('image');
+        $originalName = $image->getClientOriginalName();
+        $extension = $image->getClientOriginalExtension();
+        $filename = $this->generateUniqueFilename($originalName, $extension);
+
+        // Store the file in the 'public' disk
+        $imgpath = $image->storeAs('images',$filename,'public');
+
         $registers = new Register();
         $registers->r_fname = $fname;
         $registers->r_lname = $lname;
@@ -60,6 +82,7 @@ class RegisterController extends Controller
         $registers->r_workplace = $workplace;
         $registers->r_role = $role;
         $registers->r_position = $position;
+        $registers->r_imgpath = $imgpath;
         $registers->save();
         /*$result = DB::statement("insert into registers(r_fname,r_lname,r_year,r_mobile,r_scnum,r_email,r_workplace,r_role,r_position)
                                  values(?,?,?,?,?,?,?,?,?)",
@@ -68,4 +91,15 @@ class RegisterController extends Controller
 
 
     }
+
+    private function generateUniqueFilename($originalName, $extension)
+{
+    // You can use various strategies here to generate a unique filename
+    // For example, appending a timestamp or a random string to the original name.
+    $filename = pathinfo($originalName, PATHINFO_FILENAME);
+    $filename = Str::slug($filename); // Convert to a URL-friendly slug
+    $filename = $filename . '_' . time() . '.' . $extension;
+
+    return $filename;
+}
 }
