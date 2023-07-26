@@ -11,7 +11,14 @@
   <link rel="stylesheet" href="CSS/update.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
+
 <body>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
   <div >
     <div>
       <div>
@@ -32,26 +39,41 @@
                   <div class="col-sm-6 mb-4">
                     <label>First Name</label>
                     <input type="text" class="form-control " name="fname">
+                    @error('fname')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                  @enderror
                   </div>
                   <div class="col-sm-6 mb-4">
                     <label>Last Name</label>
                     <input type="text" class="form-control " name="lname">
+                    @error('lname')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                 @enderror
                   </div>
                   <div class="col-sm-6 mb-4">
                     <label>Year</label>
                     <input type="text" class="form-control " placeholder="****" name="year">
                   </div>
                   <div class="col-sm-6 mb-4">
-                    <label> phone number </label>
+                    <label> Phone number </label>
                     <input type="text" class="form-control " placeholder="" name="mobile">
+                    @error('mobile')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                   @enderror
                   </div>
                   <div class="col-sm-6 mb-4">
                   <label> SC number </label>
                     <input type="text" class="form-control" placeholder="SC/20**/*****" name="scnum">
+                    @error('scnum')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                     @enderror
                   </div>
                   <div class="col-sm-6 mb-4">
                     <label>Email</label>
-                    <input type="text" class="form-control" placeholder="Email address" name="email" required>
+                    <input type="text" class="form-control" placeholder="Email address" name="email" >
+                    @error('email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <br>
                   </div>
                   <div class="col-sm-6 mb-4">
@@ -60,6 +82,9 @@
                     <div>   <input type="radio" id="role" name="role" value="bcs"/> BCS
                           <br>
                             <input type="radio" id="role" name="role" value="bsc"/> BSC <br/>
+                            @error('role')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                   </div>
                 </div>
@@ -67,7 +92,7 @@
 
                     <label class="mt-2"></label>
                     <select class="form-select" aria-label="" name="position">
-                      <option selected>Position</option>
+                      <option value="" disabled selected>Select an option...</option>
                       <option value="Software Developer">Software Developer</option>
                       <option value="UX Designer">UX Designer</option>
                       <option value="Mobile App Developer">Mobile App Developer</option>
@@ -81,12 +106,18 @@
                       <option value="Other">Other</option>
                     </select>
                     <br>
+                    @error('position')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                   </div>
                   <div class="col-sm-6 mb-4">
                      <div class="col-sm-6 mb-4">
                      <label>Work Place</label>
-                     <input type="text" class="form-control" placeholder="Virtusa/ifs/any" name="workplace" required>
+                     <input type="text" class="form-control" placeholder="Virtusa/ifs/any" name="workplace">
                         <br>
+                        @error('workplace')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                   </div>
 
@@ -100,7 +131,10 @@
                   <div class="col-sm-6 mb-4">
                   <label>Profile photo</label>
                       <div class="form-group">
-                        <input class="form-control" type="file" name="uploadfile" value="" />
+                        <input class="form-control" type="file" name="image" value="" />
+                        @error('image')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                       </div>
                   </div>
                   <div class="col-sm-6 mb-4" style=" text-align: right;">
