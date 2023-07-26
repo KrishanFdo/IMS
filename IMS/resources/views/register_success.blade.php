@@ -38,7 +38,7 @@ a:hover, a:active {
                   <div class="col-sm-12 mb-8">
                   <div style="text-align: center;" >
                           <h1 class="text-warning">Succefully Register</h1>
-                               
+
                      </div>
                      </div>
                      </div>
@@ -48,19 +48,19 @@ a:hover, a:active {
                           <h2 class="text-warning">We will inform you via email after registered!!!</h2>
                           <div class="bg-primary p-3"></div>
                           <a href="<?=url('register')?>">OK</a>
-                        
+
                      </div>
                      </div>
                      </div><div class="text-center">
-                        <img src="download.jpg" class="rounded" alt="..."  style="width:60%">
+                        <img src="./../site-images/bg-register-success.jpg" class="rounded" alt="..."  style="width:60%">
                         </div>
                      <div>
 
-             
-            
+
+
           </div>
         </div>
 
 </body>
 
-</html>  
+</html>
