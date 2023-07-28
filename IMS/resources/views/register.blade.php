@@ -59,7 +59,7 @@
                   </div>
                   <div class="col-sm-6 mb-4">
                     <label> Phone number </label>
-                    <input type="text" class="form-control " placeholder="" name="mobile">
+                    <input type="text" class="form-control " placeholder="+94XXXXXXXXX" name="mobile">
                     @error('mobile')
                     <div class="alert alert-danger">{{ $message }}</div>
                    @enderror

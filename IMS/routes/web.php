@@ -28,8 +28,6 @@ Route::get('/log', function () {
     return view('log');
 });
 
-Route::get('/admin-accept', function () {
-    return view('adminaccept');
-});
+Route::get('/admin-accept',[RegisterController::class,'admin_accept']);
 
 

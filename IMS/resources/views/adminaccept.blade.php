@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 
     <!--bootstrap css-->
+    <link href="{{ asset('css/userlist.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/usertiles.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/button.css') }}" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="CSS/userlist.css">
@@ -22,18 +27,18 @@
             <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="fa-solid fa-bars-staggered"></i></button>
         </div>
 
-    
+
         <ul class="list-unstyled px-2 ">
             <li class="active"><a href="useraccep.html" class="text-decoration-none px-3 py-3 d-block">NEW USERS</a></li>
             <li class=""><a href="" class="text-decoration-none px-3 py-3 d-block">USERS DETAILS</a></li>
             <li class=""><a href="" class="text-decoration-none px-3 py-3 d-block">REMOVE USER</a></li>
 
         </ul>
-        
+
 
     </div>
     <div class="content">
-        
+
         <nav class="navbar navbar-expand-md py-3 navbar-light bg-light ">
             <div class="container-fluid">
             <div class="d-flex justify-content-between d-md-none d-block">
@@ -41,10 +46,10 @@
             <a class="navbar-brand fs-4" href="#"></a>
             </div>
             <button class="navbar-toggler p-0 border-0 " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                
+
                 <i class="fa-solid fa-bars"></i>
             </button>
-          
+
             <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
               <ul class="navbar-nav  mb-2 mb-lg-0">
                 <!--<li class="nav-item py-2 p-2 me-4">
@@ -62,49 +67,31 @@
         </div>
           </nav>
 
-          <div class="registeremp ms-5 px-3 pt-4">
-            <table class="table">
-                <thead >
-                    <tr class="col-sm-2">
-                    <td class="text text-info">User Name</td>
-                    <td class="text text-info ">IMAGE</td>
-                    <td class="text text-info ">SC Number</td>
-                    <td class="text text-info ">Year</td>
-                    <td class="text text-info ">Role</td>
-                    <td class="text text-info ">Position</td>
-                    <td class="text text-info ">Work Place</td>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td scope="col text-center">Kamal</td>
-                    <td class="w-25 text-center"><img src="" alt="emp"></td>
-                        <td scope="col text-center">SC/20**/*****</td>
-                        <td scope="col text text-center">20**</td>
-                        <td scope="col text text-center">BCS</td>
-                        <td scope="col text text-center">Software Engineer</td>
-                        <td scope="col text text-center">Virthusa</td>
-                </tr>    
-                <tr class="col-sm-2">
-                    
-                </tr>
-                <tr class="col-sm-2">
-                    <td scope="col"></td>
-                    <td class="w-25"></td>
-                    <td scope="col"></td>
-                    <td scope="col"></td>
-                    <td scope="col"></td>
-                    <td> <a href="#" class="btn btn-primary text-white btn-sm btn-right col-sm-10">Accept</a></td>
-                    <td><a href="#" class="btn btn-danger text-white btn-sm btn-right col-sm-11">Remove</a></td>
-                </tr>
-            </tbody>
-            </table>
-          </div>
+                @foreach($data as $item)
+                <div class="user-tile">
+                    <div class="user-avatar">
+                        <img src="{{ asset('storage/'.$item->r_imgpath) }}" alt="User Avatar">
+                    </div>
+                    <div class="user-details">
+                        <h2 style="color: blue;">{{ $item->r_fname }} {{ $item->r_lname }}</h2>
+                        <br>
+                        <p><b>SC-Number:</b> {{ $item->r_scnum }}</p>
+                        <p><b>Email:</b> {{ $item->r_email }}</p>
+                        <p><b>Mobile:</b> {{ $item->r_mobile }}</p>
+                        <p><b>Year:</b> {{ $item->r_year }}</p>
+                        <p><b>BCS/BSC:</b> {{ $item->r_role }}</p>
+                        <p><b>Workplace:</b> {{ $item->r_workplace }}</p>
+                        <p><b>Position:</b> {{ $item->r_position }}</p>
 
+                        <div class="container">
+                            <a href="#" class="accept">Accept</a>
+                            <a href="#" class="remove">Remove</a>
+                        </div>
 
-            
-         
-          
+                    </div>
+                </div>
+                @endforeach
+
     </div>
    </div>
 
@@ -113,13 +100,13 @@
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
    <script src="https://kit.fontawesome.com/c752b78af3.js" crossorigin="anonymous"></script>
-   
-   
+
+
    <script>
     $(".sidebar ul li").on('click', function() {
             $(".sidebar ul li.active").removeClass('active');
             $(this).addClass('active');
-            
+
         })
 
         $('.open-btn').on('click',function(){
@@ -129,9 +116,9 @@
         $('.close-btn').on('click',function(){
      $('.sidebar').removeClass('active');
         })
-        
 
-        
+
+
     </script>
 
 

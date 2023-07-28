@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('r_fname',15);
             $table->string('r_lname',50);
             $table->string('r_year',4);
-            $table->string('r_mobile',10);
+            $table->string('r_mobile',14);
             $table->string('r_scnum',15)->unique();
             $table->string('r_email',50)->unique();
             $table->string('r_workplace',25);

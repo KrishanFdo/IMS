@@ -47,7 +47,7 @@ class RegisterController extends Controller
             'workplace'=>'required',
             'role'=>'required',
             'position'=>'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $fname = $request->input("fname");
@@ -64,13 +64,16 @@ class RegisterController extends Controller
         else
             $position = $request->input("position");
 
-        $image = $request->file('image');
-        $originalName = $image->getClientOriginalName();
-        $extension = $image->getClientOriginalExtension();
-        $filename = $this->generateUniqueFilename($originalName, $extension);
+        if ($request->hasFile('image')){
+            $image = $request->file('image');
+            $originalName = $image->getClientOriginalName();
+            $extension = $image->getClientOriginalExtension();
+            $filename = $this->generateUniqueFilename($originalName, $extension);
 
-        // Store the file in the 'public' disk
-        $imgpath = $image->storeAs('images',$filename,'public');
+            // Store the file in the 'public' disk
+            $imgpath = $image->storeAs('images',$filename,'public');
+        }else $imgpath = null;
+
 
         $registers = new Register();
         $registers->r_fname = $fname;
@@ -93,13 +96,18 @@ class RegisterController extends Controller
     }
 
     private function generateUniqueFilename($originalName, $extension)
-{
-    // You can use various strategies here to generate a unique filename
-    // For example, appending a timestamp or a random string to the original name.
-    $filename = pathinfo($originalName, PATHINFO_FILENAME);
-    $filename = Str::slug($filename); // Convert to a URL-friendly slug
-    $filename = $filename . '_' . time() . '.' . $extension;
+    {
+        // You can use various strategies here to generate a unique filename
+        // For example, appending a timestamp or a random string to the original name.
+        $filename = pathinfo($originalName, PATHINFO_FILENAME);
+        $filename = Str::slug($filename); // Convert to a URL-friendly slug
+        $filename = $filename . '_' . time() . '.' . $extension;
 
-    return $filename;
-}
+        return $filename;
+    }
+
+    public function admin_accept(){
+        $data = Register::all();
+        return view('adminaccept', compact('data'));
+    }
 }
