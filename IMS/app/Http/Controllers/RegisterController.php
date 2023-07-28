@@ -6,7 +6,7 @@ use App\Models\Register;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class RegisterController extends Controller
@@ -109,5 +109,15 @@ class RegisterController extends Controller
     public function admin_accept(){
         $data = Register::all();
         return view('adminaccept', compact('data'));
+    }
+
+    public function delete_register($id){
+        $reg = Register::where('r_id',$id)->first();
+        if (File::exists('storage/'.$reg->r_imgpath)) {
+            File::delete($reg->r_imgpath);
+        }
+        Register::where('r_id',$id)->delete();
+        return redirect()->back()->with('success', 'Record Removed successfully.');
+
     }
 }

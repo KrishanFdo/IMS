@@ -29,5 +29,6 @@ Route::get('/log', function () {
 });
 
 Route::get('/admin-accept',[RegisterController::class,'admin_accept']);
+Route::get('/delete-register/{id}',[RegisterController::class,'delete_register']);
 
 
