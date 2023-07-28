@@ -94,7 +94,7 @@
                   <div class="col-sm-6 mb-4">
 
                     <label class="mt-2"></label>
-                    <select class="form-select" aria-label="" name="position">
+                    <select class="form-select" aria-label="" name="position" id="select_list">
                       <option value="" disabled selected>Select an option...</option>
                       <option value="Software Developer">Software Developer</option>
                       <option value="UX Designer">UX Designer</option>
@@ -112,6 +112,32 @@
                     @error('position')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const selectList = document.getElementById('select_list');
+                        const hiddenHtmlTag = document.getElementById('hidden_html_tag');
+
+                        // Function to toggle visibility and required attribute of the HTML tag
+                        function toggleHtmlTagVisibility() {
+                            if (selectList.value === 'Other') {
+                                hiddenHtmlTag.style.display = 'block';
+                                hiddenHtmlTag.querySelector('input').setAttribute('required', 'required');
+                            } else {
+                                hiddenHtmlTag.style.display = 'none';
+                                hiddenHtmlTag.querySelector('input').removeAttribute('required');
+                            }
+                        }
+
+                        // Call the function initially to set the initial state
+                        toggleHtmlTagVisibility();
+
+                        // Add an event listener to the select list to update visibility and required attribute on change
+                        selectList.addEventListener('change', toggleHtmlTagVisibility);
+                    });
+                </script>
+
+
                   </div>
                   <div class="col-sm-6 mb-4">
                      <div class="col-sm-6 mb-4">
@@ -124,13 +150,15 @@
                     </div>
                   </div>
 
-                      <div class="col-sm-6 mb-4">
+
+                      <div id="hidden_html_tag" class="col-sm-6 mb-4" style="display: none;">
                             <div class="col-sm-6 mb-4">
                               <label>Other Position</label>
-                              <input type="text" class="form-control" placeholder="Position" name="other-position" >
+                              <input type="text" class="form-control" placeholder="Position" name="other-position" required>
                              <br>
                              </div>
                         </div>
+
                   <div class="col-sm-6 mb-4">
                   <label>Profile photo</label>
                       <div class="form-group">

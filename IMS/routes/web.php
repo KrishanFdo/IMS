@@ -24,11 +24,11 @@ Route::get('/register', function () {
 
 Route::post('/register-submit',[RegisterController::class,'register']);
 
-Route::get('/', function () {
+Route::get('/log', function () {
     return view('log');
 });
 
-Route::get('/', function () {
+Route::get('/admin-accept', function () {
     return view('adminaccept');
 });
 
