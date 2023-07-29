@@ -39,12 +39,6 @@
     </div>
     <div class="content">
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
         <nav class="navbar navbar-expand-md py-3 navbar-light bg-light ">
             <div class="container-fluid">
             <div class="d-flex justify-content-between d-md-none d-block">
@@ -72,6 +66,12 @@
             </div>
         </div>
           </nav>
+
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
                 @foreach($data as $item)
                 <div class="user-tile">

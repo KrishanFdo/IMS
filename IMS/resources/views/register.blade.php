@@ -14,11 +14,7 @@
 
 
 <body>
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+
   <div >
     <div>
       <div>
@@ -33,6 +29,11 @@
 
           <div class="dashboard-content ms-5 px-3 pt-4">
             <div class="container">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
               <form class="form-group" action="<?=url('/register-submit')?>" method="POST" enctype='multipart/form-data'>
 
                 <div class="row jumbotron">
