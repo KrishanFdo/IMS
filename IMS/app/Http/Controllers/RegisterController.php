@@ -114,7 +114,7 @@ class RegisterController extends Controller
     public function delete_register($id){
         $reg = Register::where('r_id',$id)->first();
         if (File::exists('storage/'.$reg->r_imgpath)) {
-            File::delete($reg->r_imgpath);
+            File::delete('storage/'.$reg->r_imgpath);
         }
         Register::where('r_id',$id)->delete();
         return redirect()->back()->with('success', 'Record Removed successfully.');
