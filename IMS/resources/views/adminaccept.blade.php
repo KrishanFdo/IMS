@@ -39,6 +39,12 @@
     </div>
     <div class="content">
 
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <nav class="navbar navbar-expand-md py-3 navbar-light bg-light ">
             <div class="container-fluid">
             <div class="d-flex justify-content-between d-md-none d-block">
@@ -85,7 +91,7 @@
 
                         <div class="container">
                             <a href="#" class="accept">Accept</a>
-                            <a href="#" class="remove">Remove</a>
+                            <a href="/delete-register/{{ $item->r_id }}" class="remove">Remove</a>
                         </div>
 
                     </div>
