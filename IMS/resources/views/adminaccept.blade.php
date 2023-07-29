@@ -5,12 +5,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
 
     <!--bootstrap css-->
     <link href="{{ asset('css/userlist.css') }}" rel="stylesheet">
     <link href="{{ asset('css/usertiles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/button.css') }}" rel="stylesheet">
+
+    <!-- Include jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('js/send_mail.js') }}"></script>
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -90,8 +96,8 @@
                         <p><b>Position:</b> {{ $item->r_position }}</p>
 
                         <div class="container">
-                            <a href="#" class="accept">Accept</a>
-                            <a href="/delete-register/{{ $item->r_id }}" class="remove">Remove</a>
+                            <a href="/send/{{ $item->r_id }}" id="accept" class="accept-link" data-rid="{{ $item->r_id }}">Accept</a>
+                            <a href="/delete-register/{{ $item->r_id }}" id="remove">Remove</a>
                         </div>
 
                     </div>
