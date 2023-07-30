@@ -4,7 +4,7 @@
     height: 10vh;
 }
 
-.accept {
+#accept {
     display: inline-block;
     padding: 5px 10px;
     background-color: #0cb430;
@@ -15,15 +15,15 @@
     transition: background-color 0.2s ease;
 }
 
-.accept:hover {
+#accept:hover {
     background-color: #69f587;
 }
 
-.accept:focus {
+#accept:focus {
     outline: none;
 }
 
-.remove {
+#remove {
     display: inline-block;
     padding: 5px 10px;
     margin-left: 20%;
@@ -35,10 +35,10 @@
     transition: background-color 0.2s ease;
 }
 
-.remove:hover {
+#remove:hover {
     background-color: #eca074;
 }
 
-.remove:focus {
+#remove:focus {
     outline: none;
 }

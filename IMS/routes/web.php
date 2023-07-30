@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,5 +31,7 @@ Route::get('/log', function () {
 
 Route::get('/admin-accept',[RegisterController::class,'admin_accept']);
 Route::get('/delete-register/{id}',[RegisterController::class,'delete_register']);
+
+Route::post('/send',[MailController::class,'send_accept_mail']);
 
 

@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
 
     <!--bootstrap css-->
     <link href="{{ asset('css/userlist.css') }}" rel="stylesheet">
     <link href="{{ asset('css/usertiles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/button.css') }}" rel="stylesheet">
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -75,26 +77,29 @@
 
                 @foreach($data as $item)
                 <div class="user-tile">
+                    <form action="<?=url('/send')?>" method="POST">
+                    @csrf;
                     <div class="user-avatar">
                         <img src="{{ asset('storage/'.$item->r_imgpath) }}" alt="User Avatar">
                     </div>
                     <div class="user-details">
                         <h2 style="color: blue;">{{ $item->r_fname }} {{ $item->r_lname }}</h2>
                         <br>
-                        <p><b>SC-Number:</b> {{ $item->r_scnum }}</p>
+                        <p><b>SC-Number:</b>{{ $item->r_scnum }}</p>
                         <p><b>Email:</b> {{ $item->r_email }}</p>
                         <p><b>Mobile:</b> {{ $item->r_mobile }}</p>
                         <p><b>Year:</b> {{ $item->r_year }}</p>
                         <p><b>BCS/BSC:</b> {{ $item->r_role }}</p>
                         <p><b>Workplace:</b> {{ $item->r_workplace }}</p>
                         <p><b>Position:</b> {{ $item->r_position }}</p>
-
+                        <input type="hidden" name="id" value="{{ $item->r_id }}">
                         <div class="container">
-                            <a href="#" class="accept">Accept</a>
-                            <a href="/delete-register/{{ $item->r_id }}" class="remove">Remove</a>
+                            <input type="submit" value="Accept" id="accept">
+                            <a href="/delete-register/{{ $item->r_id }}" id="remove">Remove</a>
                         </div>
 
                     </div>
+                    </form>
                 </div>
                 @endforeach
 
