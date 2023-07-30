@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('role',5);
             $table->string('position',100);
             $table->string('imgpath')->nullable();
-            $table->string('password',30);
+            $table->string('password',60);
             $table->timestamps();
         });
     }

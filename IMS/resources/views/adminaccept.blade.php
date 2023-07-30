@@ -77,8 +77,8 @@
 
                 @foreach($data as $item)
                 <div class="user-tile">
-                    <form action="<?=url('/send')?>" method="POST">
-                    @csrf;
+                    <form action="<?=url('/accept')?>" method="POST">
+                    @csrf
                     <div class="user-avatar">
                         <img src="{{ asset('storage/'.$item->r_imgpath) }}" alt="User Avatar">
                     </div>
