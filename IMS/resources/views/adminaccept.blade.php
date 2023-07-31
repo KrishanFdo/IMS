@@ -76,8 +76,6 @@
 
                 @foreach($data as $item)
                 <div class="user-tile">
-                    <form id="a-r-form" action="<?=url('/accept')?>" method="POST">
-                    @csrf
                     <div class="user-avatar">
                         <img src="{{ asset('storage/'.$item->r_imgpath) }}" alt="User Avatar">
                     </div>
@@ -91,40 +89,43 @@
                         <p><b>BCS/BSC:</b> {{ $item->r_role }}</p>
                         <p><b>Workplace:</b> {{ $item->r_workplace }}</p>
                         <p><b>Position:</b> {{ $item->r_position }}</p>
-                        <input type="hidden" name="id" value="{{ $item->r_id }}">
-                        <div class="container">
-                            <input type="submit" value="Accept" id="accept" onclick="confirmaccept(event)" data-aid="{{ $item->r_id }}">
-                            <a href="#" id="remove" onclick="confirmremove()" data-rid="{{ $item->r_id }}">Remove</a>
-                            <script>
-                                function confirmremove() {
-                                    const userId = event.target.getAttribute('data-rid');
-                                    // Display the alert box with "OK" and "Cancel" options
-                                    var confirmation = confirm("Do you want to remove?");
-
-                                    // If the user clicks "OK," redirect them to the desired route
-                                    if (confirmation) {
-                                        console.log(userId);
-                                        window.location.href = "/delete-register/"+userId;
-                                    } else {
-                                        // Optionally, you can handle what happens when the user clicks "Cancel"
-                                        // For example, do nothing or show a different message
-                                    }
-                                }
-                            </script>
-
-                        </div>
 
                     </div>
+                    <div class="container">
+                    <form id="{{ $item->r_id }}" action="<?=url('/accept')?>" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $item->r_id }}">
+                        <input type="submit" value="Accept" id="accept" onclick="confirmaccept(event)" data-aid="{{ $item->r_id }}">
                     </form>
                     <script>
                         function confirmaccept(event){
                             event.preventDefault(); // Prevent the default form submission behavior
+                            const userId = event.target.getAttribute('data-aid');
                             const result = confirm('Are you sure you want to accept?');
                             if (result) {
-                                document.getElementById('a-r-form').submit(); // Submit the form if OK is clicked
+                                document.getElementById(userId).submit(); // Submit the form if OK is clicked
                             }
                         }
                     </script>
+
+                    <form id="{{ $item->r_id }}r" action="<?=url('/delete-register')?>" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="id" value="{{ $item->r_id }}">
+                        <input type="submit" value="Remove" id="remove" onclick="confirmremove(event)" data-rid="{{ $item->r_id }}">
+                    </form>
+                    <script>
+                        function confirmremove(event) {
+                            event.preventDefault(); // Prevent the default form submission behavior
+                            const userId = event.target.getAttribute('data-rid');
+                            const result = confirm('Are you sure you want to Remove?');
+                            if (result) {
+                                document.getElementById(userId+'r').submit(); // Submit the form if OK is clicked
+                            }
+                        }
+                    </script>
+                    </div>
+
                 </div>
                 @endforeach
 

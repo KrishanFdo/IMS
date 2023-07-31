@@ -49,7 +49,8 @@ class UserController extends Controller
         return view('users', compact('data'));
     }
 
-    public function delete_user($id){
+    public function delete_user(Request $request){
+        $id = $request->input('id');
         $user = User::where('id',$id)->first();
         if (File::exists('storage/'.$user->imgpath)) {
             File::delete('storage/'.$user->imgpath);

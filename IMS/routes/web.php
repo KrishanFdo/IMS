@@ -30,10 +30,10 @@ Route::get('/log', function () {
 
 Route::post('/register-submit',[RegisterController::class,'register']);
 Route::get('/admin-accept',[RegisterController::class,'admin_accept']);
-Route::get('/delete-register/{id}',[RegisterController::class,'delete_register']);
+Route::delete('/delete-register',[RegisterController::class,'delete_register']);
 
 Route::post('/accept',[UserController::class,'accept']);
 Route::get('/users',[UserController::class,'users']);
-Route::get('/delete-user/{id}',[UserController::class,'delete_user']);
+Route::delete('/delete-user',[UserController::class,'delete_user']);
 
 
