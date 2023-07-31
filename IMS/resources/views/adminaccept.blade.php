@@ -13,7 +13,6 @@
     <link href="{{ asset('css/usertiles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/button.css') }}" rel="stylesheet">
 
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="CSS/userlist.css">
@@ -77,7 +76,7 @@
 
                 @foreach($data as $item)
                 <div class="user-tile">
-                    <form action="<?=url('/accept')?>" method="POST">
+                    <form id="a-r-form" action="<?=url('/accept')?>" method="POST">
                     @csrf
                     <div class="user-avatar">
                         <img src="{{ asset('storage/'.$item->r_imgpath) }}" alt="User Avatar">
@@ -94,12 +93,36 @@
                         <p><b>Position:</b> {{ $item->r_position }}</p>
                         <input type="hidden" name="id" value="{{ $item->r_id }}">
                         <div class="container">
-                            <input type="submit" value="Accept" id="accept">
-                            <a href="/delete-register/{{ $item->r_id }}" id="remove">Remove</a>
+                            <input type="submit" value="Accept" id="accept" onclick="confirmaccept(event)">
+                            <a href="#" id="remove" onclick="confirmremove()">Remove</a>
+                            <script>
+                                function confirmremove() {
+                                    // Display the alert box with "OK" and "Cancel" options
+                                    var confirmation = confirm("Do you want to remove?");
+
+                                    // If the user clicks "OK," redirect them to the desired route
+                                    if (confirmation) {
+                                        window.location.href = "/delete-register/{{ $item->r_id }}";
+                                    } else {
+                                        // Optionally, you can handle what happens when the user clicks "Cancel"
+                                        // For example, do nothing or show a different message
+                                    }
+                                }
+                            </script>
+
                         </div>
 
                     </div>
                     </form>
+                    <script>
+                        function confirmaccept(event){
+                            event.preventDefault(); // Prevent the default form submission behavior
+                            const result = confirm('Are you sure you want to accept?');
+                            if (result) {
+                                document.getElementById('a-r-form').submit(); // Submit the form if OK is clicked
+                            }
+                        }
+                    </script>
                 </div>
                 @endforeach
 
