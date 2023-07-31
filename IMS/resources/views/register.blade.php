@@ -83,9 +83,9 @@
                   <div class="col-sm-6 mb-4">
                   <div class="col-sm-6 mb-4">
                           <label>Role</label>  <br>
-                    <div>   <input type="radio" id="role" name="role" value="bcs"/> BCS
+                    <div>   <input type="radio" id="role" name="role" value="BCS"/> BCS
                           <br>
-                            <input type="radio" id="role" name="role" value="bsc"/> BSC <br/>
+                            <input type="radio" id="role" name="role" value="BSC"/> BSC <br/>
                             @error('role')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
