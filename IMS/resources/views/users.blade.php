@@ -30,8 +30,8 @@
 
 
         <ul class="list-unstyled px-2 ">
-            <li class="active"><a href="/admin-accept" class="text-decoration-none px-3 py-3 d-block">NEWLY REGISTERED</a></li>
-            <li class=""><a href="/users" class="text-decoration-none px-3 py-3 d-block">USERS DETAILS</a></li>
+            <li class=""><a href="/admin-accept" class="text-decoration-none px-3 py-3 d-block">NEWLY REGISTERED</a></li>
+            <li class="active"><a href="/users" class="text-decoration-none px-3 py-3 d-block">USERS DETAILS</a></li>
             <li class=""><a href="" class="text-decoration-none px-3 py-3 d-block">REMOVE USER</a></li>
 
         </ul>
@@ -76,25 +76,21 @@
 
                 @foreach($data as $item)
                 <div class="user-tile">
-                    <form id="a-r-form" action="<?=url('/accept')?>" method="POST">
-                    @csrf
                     <div class="user-avatar">
-                        <img src="{{ asset('storage/'.$item->r_imgpath) }}" alt="User Avatar">
+                        <img src="{{ asset('storage/'.$item->imgpath) }}" alt="User Avatar">
                     </div>
                     <div class="user-details">
-                        <h2 style="color: blue;">{{ $item->r_fname }} {{ $item->r_lname }}</h2>
+                        <h2 style="color: blue;">{{ $item->fname }} {{ $item->lname }}</h2>
                         <br>
-                        <p><b>SC-Number:</b>{{ $item->r_scnum }}</p>
-                        <p><b>Email:</b> {{ $item->r_email }}</p>
-                        <p><b>Mobile:</b> {{ $item->r_mobile }}</p>
-                        <p><b>Year:</b> {{ $item->r_year }}</p>
-                        <p><b>BCS/BSC:</b> {{ $item->r_role }}</p>
-                        <p><b>Workplace:</b> {{ $item->r_workplace }}</p>
-                        <p><b>Position:</b> {{ $item->r_position }}</p>
-                        <input type="hidden" name="id" value="{{ $item->r_id }}">
+                        <p><b>SC-Number:</b>{{ $item->scnum }}</p>
+                        <p><b>Email:</b> {{ $item->email }}</p>
+                        <p><b>Mobile:</b> {{ $item->mobile }}</p>
+                        <p><b>Year:</b> {{ $item->year }}</p>
+                        <p><b>BCS/BSC:</b> {{ $item->role }}</p>
+                        <p><b>Workplace:</b> {{ $item->workplace }}</p>
+                        <p><b>Position:</b> {{ $item->position }}</p>
                         <div class="container">
-                            <input type="submit" value="Accept" id="accept" onclick="confirmaccept(event)" data-aid="{{ $item->r_id }}">
-                            <a href="#" id="remove" onclick="confirmremove()" data-rid="{{ $item->r_id }}">Remove</a>
+                            <a href="#" id="remove" onclick="confirmremove()" data-rid="{{ $item->id }}">Remove</a>
                             <script>
                                 function confirmremove() {
                                     const userId = event.target.getAttribute('data-rid');
@@ -103,8 +99,7 @@
 
                                     // If the user clicks "OK," redirect them to the desired route
                                     if (confirmation) {
-                                        console.log(userId);
-                                        window.location.href = "/delete-register/"+userId;
+                                        window.location.href = "/delete-user/"+userId;
                                     } else {
                                         // Optionally, you can handle what happens when the user clicks "Cancel"
                                         // For example, do nothing or show a different message
@@ -115,16 +110,6 @@
                         </div>
 
                     </div>
-                    </form>
-                    <script>
-                        function confirmaccept(event){
-                            event.preventDefault(); // Prevent the default form submission behavior
-                            const result = confirm('Are you sure you want to accept?');
-                            if (result) {
-                                document.getElementById('a-r-form').submit(); // Submit the form if OK is clicked
-                            }
-                        }
-                    </script>
                 </div>
                 @endforeach
 

@@ -36,13 +36,26 @@ class UserController extends Controller
         $user->password = Hash::make($mail_data['password']);
         $user->save();
 
-        if (File::exists('storage/'.$u->r_imgpath)) {
-            File::delete('storage/'.$u->r_imgpath);
-        }
         Register::where('r_id',$id)->delete();
 
         Mail::to($user->email)->send(new RegisterMail($mail_data));
         return redirect()->back()->with('success', 'User Accepted Successfully');
+
+    }
+
+
+    public function users(){
+        $data = User::all();
+        return view('users', compact('data'));
+    }
+
+    public function delete_user($id){
+        $user = User::where('id',$id)->first();
+        if (File::exists('storage/'.$user->imgpath)) {
+            File::delete('storage/'.$user->imgpath);
+        }
+        User::where('id',$id)->delete();
+        return redirect()->back()->with('success', 'User Removed successfully.');
 
     }
 }

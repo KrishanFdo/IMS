@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('r_mobile',14);
             $table->string('r_scnum',15)->unique();
             $table->string('r_email',50)->unique();
-            $table->string('r_workplace',50);
+            $table->string('r_workplace',150);
             $table->string('r_role',5);
             $table->string('r_position',100);
             $table->string('r_imgpath')->nullable();
