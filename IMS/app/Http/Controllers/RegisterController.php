@@ -42,8 +42,8 @@ class RegisterController extends Controller
             'lname'=>'required',
             'year'=>'required|numeric|digits:4',
             'mobile'=>'required|mobile',
-            "scnum"=>'required|scnumber|unique:registers,r_scnum',
-            'email' => 'required|email|unique:registers,r_email',
+            "scnum"=>'required|scnumber|unique:registers,r_scnum|unique:users,scnum',
+            'email' => 'required|email|unique:registers,r_email|unique:users,email',
             'workplace'=>'required',
             'role'=>'required',
             'position'=>'required',
@@ -112,6 +112,7 @@ class RegisterController extends Controller
     }
 
     public function delete_register($id){
+        //$id = urldecode($id);
         $reg = Register::where('r_id',$id)->first();
         if (File::exists('storage/'.$reg->r_imgpath)) {
             File::delete('storage/'.$reg->r_imgpath);
@@ -120,4 +121,5 @@ class RegisterController extends Controller
         return redirect()->back()->with('success', 'Record Removed successfully.');
 
     }
+
 }
