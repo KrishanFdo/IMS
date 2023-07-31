@@ -111,8 +111,8 @@ class RegisterController extends Controller
         return view('adminaccept', compact('data'));
     }
 
-    public function delete_register($id){
-        //$id = urldecode($id);
+    public function delete_register(Request $request){
+        $id = $request->input('id');
         $reg = Register::where('r_id',$id)->first();
         if (File::exists('storage/'.$reg->r_imgpath)) {
             File::delete('storage/'.$reg->r_imgpath);
