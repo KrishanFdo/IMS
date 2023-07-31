@@ -30,8 +30,8 @@
 
 
         <ul class="list-unstyled px-2 ">
-            <li class="active"><a href="useraccep.html" class="text-decoration-none px-3 py-3 d-block">NEW USERS</a></li>
-            <li class=""><a href="" class="text-decoration-none px-3 py-3 d-block">USERS DETAILS</a></li>
+            <li class="active"><a href="/admin-accept" class="text-decoration-none px-3 py-3 d-block">NEWLY REGISTERED</a></li>
+            <li class=""><a href="/users" class="text-decoration-none px-3 py-3 d-block">USERS DETAILS</a></li>
             <li class=""><a href="" class="text-decoration-none px-3 py-3 d-block">REMOVE USER</a></li>
 
         </ul>
@@ -93,16 +93,18 @@
                         <p><b>Position:</b> {{ $item->r_position }}</p>
                         <input type="hidden" name="id" value="{{ $item->r_id }}">
                         <div class="container">
-                            <input type="submit" value="Accept" id="accept" onclick="confirmaccept(event)">
-                            <a href="#" id="remove" onclick="confirmremove()">Remove</a>
+                            <input type="submit" value="Accept" id="accept" onclick="confirmaccept(event)" data-aid="{{ $item->r_id }}">
+                            <a href="#" id="remove" onclick="confirmremove()" data-rid="{{ $item->r_id }}">Remove</a>
                             <script>
                                 function confirmremove() {
+                                    const userId = event.target.getAttribute('data-rid');
                                     // Display the alert box with "OK" and "Cancel" options
                                     var confirmation = confirm("Do you want to remove?");
 
                                     // If the user clicks "OK," redirect them to the desired route
                                     if (confirmation) {
-                                        window.location.href = "/delete-register/{{ $item->r_id }}";
+                                        console.log(userId);
+                                        window.location.href = "/delete-register/"+userId;
                                     } else {
                                         // Optionally, you can handle what happens when the user clicks "Cancel"
                                         // For example, do nothing or show a different message
