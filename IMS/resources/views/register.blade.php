@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <style>
+    #login {
+        display: inline-block;
+        padding: 5px 15px;
+        float: right;
+        margin-right: 20px;
+        background-color: #0c71b4;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.2s ease;
+    }
+
+    #login:hover {
+        background-color: #9acbe7;
+    }
+
+    #login:focus {
+        outline: none;
+    }
+  </style>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,15 +40,16 @@
   <div >
     <div>
       <div>
-        <h1 class="fs-8 ms-6 name"><span class="text" >Department Of Computer Science  - Univesity Of Ruhuna </span></h1>
+        <h1 class="fs-8 ms-6 name" style="text-align: center"><span class="text" >Department Of Computer Science  - Univesity Of Ruhuna </span></h1>
+
       </div>
     </div>
     <div class="content">
       <nav class="navbar navbar-expand-md py-3 navbar-light bg-light ">
         </nav>
       <div class="dashboard-content ms-5 px-3 pt-4">
+        <a id="login" href="<?=url('/login')?>">Login</a>
         <div class="container mt-3 ms-2">
-
           <div class="dashboard-content ms-5 px-3 pt-4">
             <div class="container">
                 @if (session('success'))
