@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
@@ -16,15 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return "HOME";
+Route::get('/home', function () {
+    return view('home');
 });
 
 Route::get('/register', function () {
     return view('register');
 });
 
-Route::get('/log', function () {
+Route::get('/login', function () {
     return view('log');
 });
 
@@ -35,5 +36,8 @@ Route::delete('/delete-register',[RegisterController::class,'delete_register']);
 Route::post('/accept',[UserController::class,'accept']);
 Route::get('/users',[UserController::class,'users']);
 Route::delete('/delete-user',[UserController::class,'delete_user']);
+
+Route::post('/authenticate',[LoginController::class,'authenticate']);
+Route::post('/logout',[LoginController::class,'logout']);
 
 
