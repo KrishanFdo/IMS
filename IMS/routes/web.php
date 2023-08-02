@@ -23,11 +23,11 @@ Route::get('/home', function () {
 
 Route::get('/register', function () {
     return view('register');
-});
+})->middleware('guest');
 
 Route::get('/login', function () {
     return view('log');
-});
+})->middleware('guest');
 
 Route::post('/register-submit',[RegisterController::class,'register']);
 Route::get('/admin-accept',[RegisterController::class,'admin_accept']);
