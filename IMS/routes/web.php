@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', function () {
     return view('home');
-});
+})->middleware('auth');
 
 Route::get('/register', function () {
     return view('register');
@@ -27,7 +27,7 @@ Route::get('/register', function () {
 
 Route::get('/login', function () {
     return view('log');
-})->middleware('guest');
+})->middleware('guest')->name('login');
 
 Route::post('/register-submit',[RegisterController::class,'register']);
 Route::get('/admin-accept',[RegisterController::class,'admin_accept']);
