@@ -30,9 +30,9 @@
 
 
         <ul class="list-unstyled px-2 ">
+            <li class=""><a href="<?=url('/home')?>" class="text-decoration-none px-3 py-3 d-block">HOME</a></li>
             <li class=""><a href="/admin-accept" class="text-decoration-none px-3 py-3 d-block">NEWLY REGISTERED</a></li>
             <li class="active"><a href="/users" class="text-decoration-none px-3 py-3 d-block">USERS DETAILS</a></li>
-            <li class=""><a href="" class="text-decoration-none px-3 py-3 d-block">REMOVE USER</a></li>
 
         </ul>
 
@@ -58,8 +58,9 @@
                 </li>-->
                 <nav class="navbar navbar-expand-md py-3 navbar-light bg-light ">
                     <img src="" class="avatar">
-                    <form method="POST" action="">
-                        <input type="submit" class="btn btn-secondary default btn" value="Logout" onclick="logOut()" name="logout" />
+                    <form id="logout" method="POST" action="<?=url('/logout')?>">
+                        @csrf
+                        <input type="submit" class="btn btn-secondary default btn" value="Logout" name="logout" />
                     </form>
                 </nav>
 
@@ -78,10 +79,31 @@
                 <div class="user-tile">
                     <div class="user-avatar">
                         <img src="{{ asset('storage/'.$item->imgpath) }}" alt="User Avatar">
+                        <div style="float:right;">
+                            <h2 style="color: blue; margin-top: 10px;">{{ $item->fname }} {{ $item->lname }}</h2>
+                            <div class="container">
+                                <form id="{{ $item->id }}" action="<?=url('/delete-user')?>" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="id" value="{{ $item->id }}">
+                                    <input type="submit" value="Remove" id="remove" onclick="confirmremove(event)" data-rid="{{ $item->id }}">
+                                </form>
+                                <script>
+                                    function confirmremove(event) {
+                                        event.preventDefault(); // Prevent the default form submission behavior
+                                        const userId = event.target.getAttribute('data-rid');
+                                        const result = confirm('Are you sure you want to Remove?');
+                                        if (result) {
+                                            document.getElementById(userId).submit(); // Submit the form if OK is clicked
+                                        }
+                                    }
+                                </script>
+
+                            </div>
+                        </div>
                     </div>
                     <div class="user-details">
-                        <h2 style="color: blue;">{{ $item->fname }} {{ $item->lname }}</h2>
-                        <br>
+
                         <p><b>SC-Number:</b>{{ $item->scnum }}</p>
                         <p><b>Email:</b> {{ $item->email }}</p>
                         <p><b>Mobile:</b> {{ $item->mobile }}</p>
@@ -89,25 +111,6 @@
                         <p><b>BCS/BSC:</b> {{ $item->role }}</p>
                         <p><b>Workplace:</b> {{ $item->workplace }}</p>
                         <p><b>Position:</b> {{ $item->position }}</p>
-                        <div class="container">
-                            <form id="{{ $item->id }}" action="<?=url('/delete-user')?>" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="id" value="{{ $item->id }}">
-                                <input type="submit" value="Remove" id="remove" onclick="confirmremove(event)" data-rid="{{ $item->id }}">
-                            </form>
-                            <script>
-                                function confirmremove(event) {
-                                    event.preventDefault(); // Prevent the default form submission behavior
-                                    const userId = event.target.getAttribute('data-rid');
-                                    const result = confirm('Are you sure you want to Remove?');
-                                    if (result) {
-                                        document.getElementById(userId).submit(); // Submit the form if OK is clicked
-                                    }
-                                }
-                            </script>
-
-                        </div>
 
                     </div>
                 </div>

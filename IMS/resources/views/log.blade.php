@@ -20,17 +20,31 @@
         <div class="container">
 
 
-            <form action="" method="POST">
+            <form action="<?=url('/authenticate')?>" method="POST">
             <div class="form-reg shadow p-3 mb-5 bg-white rounded">
                 <h5 class="welcome-text text-center">WELCOME TO DCS INFORMATION SYSTEM</h5>
+                @if (session('error'))
+                <div class="alert alert-success">
+                    {{ session('error') }}
+                </div>
+            @endif
                 <div class="welcome-form text-center">
-                    <input type="text" placeholder="Username" class="form-control" name="username" required><br />
-                    <input type="text" placeholder="Password" class="form-control" name="password" required><br>
+                    @csrf
+
+                    <input type="text" placeholder="Email" class="form-control" name="email"><br />
+                    @error('email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+
+                    <input type="password" placeholder="Password" class="form-control" name="password"><br>
+                    @error('password')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+
                     <select class="form-select" name="role">
                      <option value="user">User</option>
                       <option value="admin">Admin</option>
                      </select>
-                    </select>
                     <input type="submit" name="submit" class="btn btn-success mt-3" value="Login">
                     <p class="text-center text-muted mt-3 mb-0">Not Registered ?
                         <a href="<?=url('register')?>"><u>Register</u></a>
