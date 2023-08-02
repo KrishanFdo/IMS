@@ -53,7 +53,8 @@ class UserController extends Controller
         $id = $request->input('id');
         $user = User::where('id',$id)->first();
         if (File::exists('storage/'.$user->imgpath)) {
-            File::delete('storage/'.$user->imgpath);
+            if($user->imgpath != 'images/default.png')
+                File::delete('storage/'.$user->imgpath);
         }
         User::where('id',$id)->delete();
         return redirect()->back()->with('success', 'User Removed successfully.');

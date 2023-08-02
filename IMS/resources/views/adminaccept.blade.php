@@ -58,10 +58,19 @@
                 </li>-->
                 <nav class="navbar navbar-expand-md py-3 navbar-light bg-light ">
                     <img src="" class="avatar">
-                    <form id="logout" method="post" action="<?=url('/logout')?>">
+                    <form id="logout" method="POST" action="<?=url('/logout')?>">
                         @csrf
-                        <input type="submit" class="btn btn-secondary default btn" value="Logout" name="logout" />
+                        <input type="submit" class="btn btn-secondary default btn" onclick="confirmlogout(event)" value="Logout" name="logout" />
                     </form>
+                    <script>
+                        function confirmlogout(event) {
+                            event.preventDefault(); // Prevent the default form submission behavior
+                            const result = confirm('Are you sure you want to logout?');
+                            if (result) {
+                                document.getElementById('logout').submit(); // Submit the form if OK is clicked
+                            }
+                        }
+                    </script>
                 </nav>
 
               </ul>
@@ -79,8 +88,7 @@
                 <div class="user-tile">
                     <div class="user-avatar">
                         <img src="{{ asset('storage/'.$item->r_imgpath) }}" alt="User Avatar">
-                        <div style="float:right;">
-                        <h2 style="color: blue; margin-top: 10px;">{{ $item->r_fname }} {{ $item->r_lname }}</h2>
+                        <div style="float:right; margin-top: 40px; margin-right: 20px;">
                         <div class="container">
                             <form id="{{ $item->r_id }}" action="<?=url('/accept')?>" method="POST">
                                 @csrf
@@ -118,6 +126,7 @@
                         </div>
                     </div>
                     <div class="user-details">
+                        <h4 style="color: blue;">{{ $item->r_fname }} {{ $item->r_lname }}</h4>
                         <p><b>SC-Number:</b> {{ $item->r_scnum }}</p>
                         <p><b>Email:</b> {{ $item->r_email }}</p>
                         <p><b>Mobile:</b> {{ $item->r_mobile }}</p>

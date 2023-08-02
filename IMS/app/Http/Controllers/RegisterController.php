@@ -72,7 +72,7 @@ class RegisterController extends Controller
 
             // Store the file in the 'public' disk
             $imgpath = $image->storeAs('images',$filename,'public');
-        }else $imgpath = null;
+        }else $imgpath = 'images/default.png';
 
 
         $registers = new Register();
@@ -115,7 +115,8 @@ class RegisterController extends Controller
         $id = $request->input('id');
         $reg = Register::where('r_id',$id)->first();
         if (File::exists('storage/'.$reg->r_imgpath)) {
-            File::delete('storage/'.$reg->r_imgpath);
+            if($reg->r_imgpath != 'images/default.png')
+                File::delete('storage/'.$reg->r_imgpath);
         }
         Register::where('r_id',$id)->delete();
         return redirect()->back()->with('success', 'Record Removed successfully.');

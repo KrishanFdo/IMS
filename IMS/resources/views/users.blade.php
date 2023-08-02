@@ -60,8 +60,17 @@
                     <img src="" class="avatar">
                     <form id="logout" method="POST" action="<?=url('/logout')?>">
                         @csrf
-                        <input type="submit" class="btn btn-secondary default btn" value="Logout" name="logout" />
+                        <input type="submit" class="btn btn-secondary default btn" onclick="confirmlogout(event)" value="Logout" name="logout" />
                     </form>
+                    <script>
+                        function confirmlogout(event) {
+                            event.preventDefault(); // Prevent the default form submission behavior
+                            const result = confirm('Are you sure you want to logout?');
+                            if (result) {
+                                document.getElementById('logout').submit(); // Submit the form if OK is clicked
+                            }
+                        }
+                    </script>
                 </nav>
 
               </ul>
@@ -79,8 +88,7 @@
                 <div class="user-tile">
                     <div class="user-avatar">
                         <img src="{{ asset('storage/'.$item->imgpath) }}" alt="User Avatar">
-                        <div style="float:right;">
-                            <h2 style="color: blue; margin-top: 10px;">{{ $item->fname }} {{ $item->lname }}</h2>
+                        <div style="float:right; margin-top: 40px; margin-right: 30px;">
                             <div class="container">
                                 <form id="{{ $item->id }}" action="<?=url('/delete-user')?>" method="post">
                                     @csrf
@@ -103,7 +111,7 @@
                         </div>
                     </div>
                     <div class="user-details">
-
+                        <h4 style="color: blue;">{{ $item->fname }} {{ $item->lname }}</h4>
                         <p><b>SC-Number:</b>{{ $item->scnum }}</p>
                         <p><b>Email:</b> {{ $item->email }}</p>
                         <p><b>Mobile:</b> {{ $item->mobile }}</p>
