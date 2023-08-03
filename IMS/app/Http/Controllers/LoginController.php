@@ -19,7 +19,7 @@ class LoginController extends Controller
         if(Auth::attempt(['email'=>$email,'password'=>$password])){
             $user = User::where('email',$email)->first();
             Auth::login($user);
-            return redirect('/home');
+            return redirect('/userhome');
         }else{
             return redirect()->back()->with('error', 'Invalid username and password');
         }

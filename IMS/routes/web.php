@@ -19,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', function () {
     return view('home');
+});
+
+Route::get('/userhome', function () {
+    return view('userhome');
 })->middleware('auth');
 
 Route::get('/register', function () {
@@ -35,6 +39,7 @@ Route::delete('/delete-register',[RegisterController::class,'delete_register']);
 
 Route::post('/accept',[UserController::class,'accept']);
 Route::get('/users',[UserController::class,'users']);
+Route::get('/members',[UserController::class,'members']);
 Route::delete('/delete-user',[UserController::class,'delete_user']);
 
 Route::post('/authenticate',[LoginController::class,'authenticate']);
