@@ -117,7 +117,7 @@
                 </div>
                   <div class="col-sm-6 mb-4">
 
-                    <label class="mt-2"></label>
+                    <label class="mt-2">Position</label>
                     <select class="form-select" aria-label="" name="position" id="select_list">
                       <option value="" disabled selected>Select an option...</option>
                       <option value="Software Developer">Software Developer</option>

@@ -49,6 +49,11 @@ class UserController extends Controller
         return view('users', compact('data'));
     }
 
+    public function members(){
+        $data = User::all();
+        return view('members', compact('data'));
+    }
+
     public function delete_user(Request $request){
         $id = $request->input('id');
         $user = User::where('id',$id)->first();

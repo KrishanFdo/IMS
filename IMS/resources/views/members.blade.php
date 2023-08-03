@@ -30,9 +30,8 @@
 
 
         <ul class="list-unstyled px-2 ">
-            <li class="active"><a href="<?=url('/home')?>" class="text-decoration-none px-3 py-3 d-block">HOME</a></li>
-            <li class=""><a href="/admin-accept" class="text-decoration-none px-3 py-3 d-block">NEWLY REGISTERED</a></li>
-            <li class=""><a href="/users" class="text-decoration-none px-3 py-3 d-block">USERS DETAILS</a></li>
+            <li class=""><a href="<?=url('/userhome')?>" class="text-decoration-none px-3 py-3 d-block">HOME</a></li>
+            <li class="active"><a href="<?=url('/members')?>" class="text-decoration-none px-3 py-3 d-block">MEMBERS</a></li>
 
         </ul>
 
@@ -78,8 +77,60 @@
         </div>
           </nav>
 
-          <br><br>
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
-          <h1>Hello</h1>
+                @foreach($data as $item)
+                <div class="user-tile">
+                    <div class="user-avatar">
+                        <img src="{{ asset('storage/'.$item->imgpath) }}" alt="User Avatar">
+                    </div>
+                    <div class="user-details">
+                        <h4 style="color: blue;">{{ $item->fname }} {{ $item->lname }}</h4>
+                        <p><b>SC-Number:</b>{{ $item->scnum }}</p>
+                        <p><b>Email:</b> {{ $item->email }}</p>
+                        <p><b>Mobile:</b> {{ $item->mobile }}</p>
+                        <p><b>Year:</b> {{ $item->year }}</p>
+                        <p><b>BCS/BSC:</b> {{ $item->role }}</p>
+                        <p><b>Workplace:</b> {{ $item->workplace }}</p>
+                        <p><b>Position:</b> {{ $item->position }}</p>
+
+                    </div>
+                </div>
+                @endforeach
+
+    </div>
+   </div>
+
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+   <script src="https://kit.fontawesome.com/c752b78af3.js" crossorigin="anonymous"></script>
+
+
+   <script>
+    $(".sidebar ul li").on('click', function() {
+            $(".sidebar ul li.active").removeClass('active');
+            $(this).addClass('active');
+
+        })
+
+        $('.open-btn').on('click',function(){
+     $('.sidebar').addClass('active');
+        })
+
+        $('.close-btn').on('click',function(){
+     $('.sidebar').removeClass('active');
+        })
+
+
+
+    </script>
+
+
 </body>
 </html>
