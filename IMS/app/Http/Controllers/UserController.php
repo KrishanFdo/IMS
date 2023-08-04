@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisterMail;
+use App\Mail\RemoveMail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 
@@ -57,11 +58,16 @@ class UserController extends Controller
     public function delete_user(Request $request){
         $id = $request->input('id');
         $user = User::where('id',$id)->first();
+        $email = $user->email;
+        $name = $user->fname;
         if (File::exists('storage/'.$user->imgpath)) {
             if($user->imgpath != 'images/default.png')
                 File::delete('storage/'.$user->imgpath);
         }
         User::where('id',$id)->delete();
+
+        Mail::to($email)->send(new RemoveMail($name));
+
         return redirect()->back()->with('success', 'User Removed successfully.');
 
     }
