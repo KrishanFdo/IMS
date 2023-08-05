@@ -79,6 +79,6 @@
 
           <br><br>
 
-          <h1>Hello {{ auth()->user()->fname }}</h1>
+          <h1>Welcome {{ auth()->user()->fname }}</h1>
 </body>
 </html>

@@ -58,7 +58,7 @@
                 </li>-->
                 <nav class="navbar navbar-expand-md py-3 navbar-light bg-light ">
                     <img src="" class="avatar">
-                    <form id="logout" method="POST" action="<?=url('/logout')?>">
+                    <form id="logout" method="POST" action="<?=url('/adminlogout')?>">
                         @csrf
                         <input type="submit" class="btn btn-secondary default btn" onclick="confirmlogout(event)" value="Logout" name="logout" />
                     </form>
