@@ -42,7 +42,7 @@
                     @enderror
 
                     <select class="form-select" name="role">
-                     <option value="user">User</option>
+                     <option value="user" selected>User</option>
                       <option value="admin">Admin</option>
                      </select>
                     <input type="submit" name="submit" class="btn btn-success mt-3" value="Login">

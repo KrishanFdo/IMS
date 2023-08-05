@@ -19,11 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/home', function () {
     return view('home');
-});
+})->middleware('auth:webadmin');
 
 Route::get('/userhome', function () {
     return view('userhome');
-})->middleware('auth');
+})->middleware('auth:web');
 
 Route::get('/register', function () {
     return view('register');
@@ -34,15 +34,16 @@ Route::get('/login', function () {
 })->middleware('guest')->name('login');
 
 Route::post('/register-submit',[RegisterController::class,'register']);
-Route::get('/admin-accept',[RegisterController::class,'admin_accept']);
+Route::get('/admin-accept',[RegisterController::class,'admin_accept'])->middleware('auth:webadmin');
 Route::delete('/delete-register',[RegisterController::class,'delete_register']);
 
 Route::post('/accept',[UserController::class,'accept']);
-Route::get('/users',[UserController::class,'users']);
-Route::get('/members',[UserController::class,'members']);
+Route::get('/users',[UserController::class,'users'])->middleware('auth:webadmin');
+Route::get('/members',[UserController::class,'members'])->middleware('auth:web');
 Route::delete('/delete-user',[UserController::class,'delete_user']);
 
 Route::post('/authenticate',[LoginController::class,'authenticate']);
 Route::post('/logout',[LoginController::class,'logout']);
+Route::post('/adminlogout',[LoginController::class,'adminlogout']);
 
 
