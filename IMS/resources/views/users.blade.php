@@ -58,7 +58,7 @@
                 </li>-->
                 <nav class="navbar navbar-expand-md py-3 navbar-light bg-light ">
                     <img src="" class="avatar">
-                    <form id="logout" method="POST" action="<?=url('/logout')?>">
+                    <form id="logout" method="POST" action="<?=url('/adminlogout')?>">
                         @csrf
                         <input type="submit" class="btn btn-secondary default btn" onclick="confirmlogout(event)" value="Logout" name="logout" />
                     </form>
@@ -87,8 +87,12 @@
                 @foreach($data as $item)
                 <div class="user-tile">
                     <div class="user-avatar">
+                        <div style="display: flex;">
                         <img src="{{ asset('storage/'.$item->imgpath) }}" alt="User Avatar">
-                        <div style="float:right; margin-top: 40px; margin-right: 30px;">
+                        <div style=" margin-top: 40px; margin-left: 10px">
+                            <h4 style="color: blue;">{{ $item->fname }} {{ $item->lname }}</h4>
+                        </div>
+                        <div style="float:right; margin-top: 30px; margin-right: 30px; margin-left: 30px;">
                             <div class="container">
                                 <form id="{{ $item->id }}" action="<?=url('/delete-user')?>" method="post">
                                     @csrf
@@ -109,16 +113,27 @@
 
                             </div>
                         </div>
+                        </div>
                     </div>
                     <div class="user-details">
-                        <h4 style="color: blue;">{{ $item->fname }} {{ $item->lname }}</h4>
+
+                    <div style="display: flex;">
+                        <div>
                         <p><b>SC-Number:</b>{{ $item->scnum }}</p>
                         <p><b>Email:</b> {{ $item->email }}</p>
                         <p><b>Mobile:</b> {{ $item->mobile }}</p>
-                        <p><b>Year:</b> {{ $item->year }}</p>
-                        <p><b>BCS/BSC:</b> {{ $item->role }}</p>
+                        <p><b>WhatsApp Mobile:</b> {{ $item->wmobile }}</p>
+                        <p><b>Entered Year:</b> {{ $item->eyear }}</p>
+                        <p><b>Pass Out Year:</b> {{ $item->pyear }}</p>
+                        </div>
+                        <div style="margin-left: 80px">
+                        <p><b>Degree:</b> {{ $item->role }}</p>
                         <p><b>Workplace:</b> {{ $item->workplace }}</p>
                         <p><b>Position:</b> {{ $item->position }}</p>
+                        <p><b>Qualifications:</b> {{ $item->qualifications }}</p>
+                        <p><b>Country:</b> {{ $item->country }}</p>
+                        </div>
+                    </div>
 
                     </div>
                 </div>

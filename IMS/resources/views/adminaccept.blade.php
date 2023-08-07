@@ -87,8 +87,12 @@
                 @foreach($data as $item)
                 <div class="user-tile">
                     <div class="user-avatar">
+                        <div style="display: flex;">
                         <img src="{{ asset('storage/'.$item->r_imgpath) }}" alt="User Avatar">
-                        <div style="float:right; margin-top: 40px; margin-right: 20px;">
+                        <div style=" margin-top: 40px; margin-left: 10px">
+                            <h4 style="color: blue;">{{ $item->r_fname }} {{ $item->r_lname }}</h4>
+                        </div>
+                        <div style="float:right; margin-top: 30px; margin-right: 20px;">
                         <div class="container">
                             <form id="{{ $item->r_id }}" action="<?=url('/accept')?>" method="POST">
                                 @csrf
@@ -124,17 +128,23 @@
                             </script>
                         </div>
                         </div>
+                        </div>
                     </div>
                     <div class="user-details">
-                        <h4 style="color: blue;">{{ $item->r_fname }} {{ $item->r_lname }}</h4>
-                        <p><b>SC-Number:</b> {{ $item->r_scnum }}</p>
-                        <p><b>Email:</b> {{ $item->r_email }}</p>
-                        <p><b>Mobile:</b> {{ $item->r_mobile }}</p>
-                        <p><b>Year:</b> {{ $item->r_year }}</p>
-                        <p><b>BCS/BSC:</b> {{ $item->r_role }}</p>
-                        <p><b>Workplace:</b> {{ $item->r_workplace }}</p>
-                        <p><b>Position:</b> {{ $item->r_position }}</p>
 
+                        <div style="display: flex;">
+                            <div>
+                                <p><b>SC-Number:</b> {{ $item->r_scnum }}</p>
+                                <p><b>Email:</b> {{ $item->r_email }}</p>
+                                <p><b>Mobile:</b> {{ $item->r_mobile }}</p>
+                                <p><b>Pass Out Year:</b> {{ $item->r_pyear }}</p>
+                            </div>
+                            <div style="margin-left: 80px">
+                                <p><b>Degree:</b> {{ $item->r_role }}</p>
+                                <p><b>Workplace:</b> {{ $item->r_workplace }}</p>
+                                <p><b>Position:</b> {{ $item->r_position }}</p>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
