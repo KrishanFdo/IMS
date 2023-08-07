@@ -43,24 +43,32 @@ class RegisterController extends Controller
         $request->validate([
             'fname'=>'required',
             'lname'=>'required',
-            'year'=>'required|numeric|digits:4',
+            'eyear'=>'required|numeric|digits:4',
+            'pyear'=>'required|numeric|digits:4',
             'mobile'=>'required|mobile',
+            'wmobile'=>'required|mobile',
             "scnum"=>'required|scnumber|unique:registers,r_scnum|unique:users,scnum',
             'email' => 'required|email|unique:registers,r_email|unique:users,email',
             'workplace'=>'required',
             'role'=>'required',
             'position'=>'required',
+            'qualifications'=>'required',
+            'country'=>'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $fname = $request->input("fname");
         $lname = $request->input("lname");
-        $year = $request->input("year");
+        $eyear = $request->input("eyear");
+        $pyear = $request->input("pyear");
         $mobile = $request->input("mobile");
+        $wmobile = $request->input("wmobile");
         $scnum = $request->input("scnum");
         $email = $request->input("email");
         $workplace = $request->input("workplace");
         $role = $request->input("role");
+        $qualifications = $request->input("qualifications");
+        $country = $request->input("country");
 
         if($request->input("position")=="Other")
             $position = $request->input("other-position");
@@ -81,13 +89,17 @@ class RegisterController extends Controller
         $registers = new Register();
         $registers->r_fname = $fname;
         $registers->r_lname = $lname;
-        $registers->r_year = $year;
+        $registers->r_eyear = $eyear;
+        $registers->r_pyear = $pyear;
         $registers->r_mobile = $mobile;
+        $registers->r_wmobile = $wmobile;
         $registers->r_scnum = $scnum;
         $registers->r_email = $email;
         $registers->r_workplace = $workplace;
         $registers->r_role = $role;
         $registers->r_position = $position;
+        $registers->r_qualifications = $qualifications;
+        $registers->r_country = $country;
         $registers->r_imgpath = $imgpath;
         $registers->save();
 

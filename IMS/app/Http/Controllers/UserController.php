@@ -26,13 +26,17 @@ class UserController extends Controller
         $user = new User();
         $user->fname = $u->r_fname;
         $user->lname = $u->r_lname;
-        $user->year = $u->r_year;
+        $user->eyear = $u->r_eyear;
+        $user->pyear = $u->r_pyear;
         $user->mobile = $u->r_mobile;
+        $user->wmobile = $u->r_wmobile;
         $user->scnum = $u->r_scnum;
         $user->email = $u->r_email;
         $user->workplace = $u->r_workplace;
         $user->role = $u->r_role;
         $user->position = $u->r_position;
+        $user->qualifications = $u->r_qualifications;
+        $user->country = $u->r_country;
         $user->imgpath = $u->r_imgpath;
         $user->password = Hash::make($mail_data['password']);
         $user->save();
