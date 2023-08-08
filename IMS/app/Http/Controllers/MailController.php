@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\RegisterFormMail;
 use App\Models\Register;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
@@ -31,5 +32,35 @@ class MailController extends Controller
         Mail::to($user->r_email)->send(new RegisterFormMail($user->r_fname));
 
         return redirect()->back()->with('success', 'User Accepted Successfully');
+    }
+
+    public function sendmail(Request $request){
+
+        $request->validate([
+            'role'=>'required',
+            'country'=>'required'
+        ]);
+        $role = $request->input('role');
+        $country = $request->input('country');
+
+        if($role =='all' && $country == 'all'){
+            $users = User::all();
+        }
+        else if($role =='all')
+            $users = User::where('country', $country)->get();
+        else if($country == 'all')
+            $users = User::where('role', $role)->get();
+        else{
+            $users = User::where('role', $role)
+                ->where('country', $country)
+                ->get();
+        }
+
+        $recipientEmails = $users->pluck('email')->implode(',');
+        //dd($recipientEmails);
+
+        $gmailUrl = "https://mail.google.com/mail/u/0/?view=cm&to={$recipientEmails}";
+
+        return redirect()->away($gmailUrl);
     }
 }

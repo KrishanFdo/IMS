@@ -33,7 +33,7 @@
             <li class="active"><a href="<?=url('/home')?>" class="text-decoration-none px-3 py-3 d-block">HOME</a></li>
             <li class=""><a href="/admin-accept" class="text-decoration-none px-3 py-3 d-block">NEWLY REGISTERED</a></li>
             <li class=""><a href="/users" class="text-decoration-none px-3 py-3 d-block">USERS DETAILS</a></li>
-
+            <li class=""><a href="/emailsend" class="text-decoration-none px-3 py-3 d-block">SEND EMAILS</a></li>
         </ul>
 
 
