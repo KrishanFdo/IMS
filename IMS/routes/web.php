@@ -46,4 +46,10 @@ Route::post('/authenticate',[LoginController::class,'authenticate']);
 Route::post('/logout',[LoginController::class,'logout']);
 Route::post('/adminlogout',[LoginController::class,'adminlogout']);
 
+Route::get('/emailsend',function(){
+    return view('emailsend');
+})->middleware('auth:webadmin');
+
+
+Route::post('/sendmail',[MailController::class,'sendmail']);
 
