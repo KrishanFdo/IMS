@@ -130,7 +130,7 @@
                         <p><b>Degree:</b> {{ $item->role }}</p>
                         <p><b>Workplace:</b> {{ $item->workplace }}</p>
                         <p><b>Position:</b> {{ $item->position }}</p>
-                        <p><b>Qualifications:</b> {{ $item->qualifications }}</p>
+                        <p><b>Extra Qualifications:</b> {{ $item->qualifications }}</p>
                         <p><b>Country:</b> {{ $item->country }}</p>
                         </div>
                     </div>

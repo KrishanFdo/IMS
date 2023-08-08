@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('workplace',150);
             $table->string('role',15);
             $table->string('position',100);
-            $table->string('qualifications',100);
+            $table->string('qualifications',150);
             $table->string('country',30);
             $table->string('imgpath')->nullable();
             $table->string('password',60);

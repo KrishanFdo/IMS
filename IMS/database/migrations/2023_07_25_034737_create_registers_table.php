@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('r_workplace',150);
             $table->string('r_role',15);
             $table->string('r_position',100);
-            $table->string('r_qualifications',100);
+            $table->string('r_qualifications',150);
             $table->string('r_country',30);
             $table->string('r_imgpath')->nullable();
             $table->timestamps();

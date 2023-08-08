@@ -31,16 +31,16 @@ class RegisterController extends Controller
         Validator::extend('mobile', function ($attribute, $value, $parameters, $validator) {
             // Define the pattern for the custom code (SC/Year/Digits)
             $pattern = '/^\+94\d{9}$/';
-
+            $pattern2 = '/^0\d{9}$/';
             // Use preg_match to check if the value matches the pattern
-            return preg_match($pattern, $value) === 1;
+            return preg_match($pattern, $value) || preg_match($pattern2, $value);
         });
 
         Validator::replacer('mobile', function ($message, $attribute, $rule, $parameters) {
             return str_replace(':attribute', $attribute, 'Invalid format. Correct format is "+94XXXXXXXXX".');
         });
 
-        $request->validate([
+       $request->validate([
             'fname'=>'required',
             'lname'=>'required',
             'eyear'=>'required|numeric|digits:4',
@@ -52,7 +52,6 @@ class RegisterController extends Controller
             'workplace'=>'required',
             'role'=>'required',
             'position'=>'required',
-            'qualifications'=>'required',
             'country'=>'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
@@ -85,6 +84,11 @@ class RegisterController extends Controller
             $imgpath = $image->storeAs('images',$filename,'public');
         }else $imgpath = 'images/default.png';
 
+        $qual=$request->input("qualifications",[]);
+        $qualifications = "";
+        foreach($qual as $q){
+            $qualifications .= $q . ",";
+        }
 
         $registers = new Register();
         $registers->r_fname = $fname;
