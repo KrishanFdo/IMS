@@ -191,21 +191,35 @@
 
                   </div>
                   <div class="col-sm-6 mb-4">
-                     <div class="col-sm-6 mb-4">
-                     <label class="mt-2">Other Qulification</label>
-                    <select class="form-select" aria-label="" name="qualifications" id="select_list1">
-                      <option value="" disabled selected>Select an option...</option>
-                      <option value="Completed MSC ">Completed msc </option>
-                      <option value="Completed PHD">Completed phd</option>
-                      <option value="Following MSC">Following msc</option>
-                      <option value="Following PHD">Following phd</option>
-                      <option value="No">No</option>
-                  </select>
-                        <br>
-                        @error('OtherQulification')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                    <label>Extra Qualifications</label><br>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Msc" name="qualifications[]">
+                      <label class="form-check-label" for="inlineCheckbox1">Msc</label>
                     </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="MSc Reading" name="qualifications[]">
+                      <label class="form-check-label" for="inlineCheckbox2">MSc Reading</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Phd" name="qualifications[]">
+                      <label class="form-check-label" for="inlineCheckbox3">Phd</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="Phd Reading" name="qualifications[]">
+                      <label class="form-check-label" for="inlineCheckbox4">Phd Reading</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="MPhil" name="qualifications[]">
+                      <label class="form-check-label" for="inlineCheckbox5">MPhil</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="MPhil Reading" name="qualifications[]">
+                      <label class="form-check-label" for="inlineCheckbox6">MPhil Reading</label>
+                    </div>
+                    @error('qualifications[]')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                   </div>
 
                   <div class="col-sm-6 mb-4">
