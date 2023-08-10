@@ -147,12 +147,20 @@ class RegisterController extends Controller
         $reg = Register::where('r_id',$id)->first();
         $email = $reg->r_email;
         $name = $reg->r_fname;
-        if (File::exists('storage/'.$reg->r_imgpath)) {
-            if($reg->r_imgpath != 'images/default.png')
-                File::delete('storage/'.$reg->r_imgpath);
+        try{
+            Mail::to($email)->send(new RemoveMail($name));
+            Register::where('r_id',$id)->delete();
+            if (File::exists('storage/'.$reg->r_imgpath)) {
+                if($reg->r_imgpath != 'images/default.png')
+                    File::delete('storage/'.$reg->r_imgpath);
+            }
         }
-        Register::where('r_id',$id)->delete();
-        Mail::to($email)->send(new RemoveMail($name));
+        catch(Exception $e){
+            return redirect()->back()->with('mailerror', 'Removal Unsuccessful! Network Error or any other error');
+        }
+
+
+
         return redirect()->back()->with('success', 'Record Removed successfully.');
 
     }

@@ -83,6 +83,11 @@
                         {{ session('success') }}
                     </div>
                 @endif
+                @if (session('mailerror'))
+                    <div class="alert alert-danger">
+                        {{ session('mailerror') }}
+                    </div>
+                @endif
 
                 @foreach($data as $item)
                 <div class="user-tile">
