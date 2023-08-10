@@ -11,6 +11,7 @@ use App\Mail\RegisterMail;
 use App\Mail\RemoveMail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
+use Exception;
 
 class UserController extends Controller
 {
@@ -40,10 +41,15 @@ class UserController extends Controller
         $user->imgpath = $u->r_imgpath;
         $user->password = Hash::make($mail_data['password']);
         $user->save();
+        try{
+            Mail::to($user->email)->send(new RegisterMail($mail_data));
+            Register::where('r_id',$id)->delete();
+        }
+        catch(Exception $e){
+            User::where('scnum',$u->r_scnum)->delete();
+            return redirect()->back()->with('mailerror', 'Accepting Unsuccessful! Network Error or any other error');
+        }
 
-        Register::where('r_id',$id)->delete();
-
-        Mail::to($user->email)->send(new RegisterMail($mail_data));
         return redirect()->back()->with('success', 'User Accepted Successfully');
 
     }
@@ -64,13 +70,18 @@ class UserController extends Controller
         $user = User::where('id',$id)->first();
         $email = $user->email;
         $name = $user->fname;
-        if (File::exists('storage/'.$user->imgpath)) {
-            if($user->imgpath != 'images/default.png')
-                File::delete('storage/'.$user->imgpath);
-        }
-        User::where('id',$id)->delete();
+        try{
+            Mail::to($email)->send(new RemoveMail($name));
+            User::where('id',$id)->delete();
+            if (File::exists('storage/'.$user->imgpath)) {
+                if($user->imgpath != 'images/default.png')
+                    File::delete('storage/'.$user->imgpath);
+            }
 
-        Mail::to($email)->send(new RemoveMail($name));
+        }
+        catch(Exception $e){
+            return redirect()->back()->with('mailerror', 'Removal Unsuccessful! Network Error or any other error');
+        }
 
         return redirect()->back()->with('success', 'User Removed successfully.');
 

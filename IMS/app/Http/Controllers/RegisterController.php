@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\RegisterFormMail;
 use App\Mail\RemoveMail;
 use App\Models\Register;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -107,10 +108,19 @@ class RegisterController extends Controller
         $registers->r_imgpath = $imgpath;
         $registers->save();
 
-        Mail::to($registers->r_email)->send(new RegisterFormMail($registers->r_fname));
-        /*$result = DB::statement("insert into registers(r_fname,r_lname,r_year,r_mobile,r_scnum,r_email,r_workplace,r_role,r_position)
-                                 values(?,?,?,?,?,?,?,?,?)",
-                                [$fname,$lname,$year,$mobile,$scnum,$email,$workplace,$role,$position]);*/
+        try{
+            Mail::to($registers->r_email)->send(new RegisterFormMail($registers->r_fname));
+        }
+        catch(Exception $e){
+            $reg = Register::where('r_scnum',$scnum)->first();
+            if (File::exists('storage/'.$reg->r_imgpath)) {
+                if($reg->r_imgpath != 'images/default.png')
+                    File::delete('storage/'.$reg->r_imgpath);
+            }
+            Register::where('r_scnum',$scnum)->delete();
+            return redirect()->back()->with('mailerror', 'Registration Unsuccessful! Network Error or any other error');
+        }
+
         return redirect()->back()->with('success', 'Registered successfully! Check your Email-Inbox');
 
 
@@ -137,13 +147,20 @@ class RegisterController extends Controller
         $reg = Register::where('r_id',$id)->first();
         $email = $reg->r_email;
         $name = $reg->r_fname;
-        if (File::exists('storage/'.$reg->r_imgpath)) {
-            if($reg->r_imgpath != 'images/default.png')
-                File::delete('storage/'.$reg->r_imgpath);
+        try{
+            Mail::to($email)->send(new RemoveMail($name));
+            Register::where('r_id',$id)->delete();
+            if (File::exists('storage/'.$reg->r_imgpath)) {
+                if($reg->r_imgpath != 'images/default.png')
+                    File::delete('storage/'.$reg->r_imgpath);
+            }
         }
-        Mail::to($email)->send(new RemoveMail($name));
+        catch(Exception $e){
+            return redirect()->back()->with('mailerror', 'Removal Unsuccessful! Network Error or any other error');
+        }
 
-        Register::where('r_id',$id)->delete();
+
+
         return redirect()->back()->with('success', 'Record Removed successfully.');
 
     }
