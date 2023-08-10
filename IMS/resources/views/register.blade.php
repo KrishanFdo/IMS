@@ -57,6 +57,11 @@
                         {{ session('success') }}
                     </div>
                 @endif
+                @if (session('mailerror'))
+                    <div class="alert alert-danger">
+                        {{ session('mailerror') }}
+                    </div>
+                @endif
               <form class="form-group" action="<?=url('/register-submit')?>" method="POST" enctype='multipart/form-data'>
 
                 <div class="row jumbotron">
