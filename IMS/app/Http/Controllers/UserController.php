@@ -41,10 +41,15 @@ class UserController extends Controller
         $user->imgpath = $u->r_imgpath;
         $user->password = Hash::make($mail_data['password']);
         $user->save();
+        try{
+            Mail::to($user->email)->send(new RegisterMail($mail_data));
+            Register::where('r_id',$id)->delete();
+        }
+        catch(Exception $e){
+            User::where('scnum',$u->r_scnum)->delete();
+            return redirect()->back()->with('mailerror', 'Accepting Unsuccessful! Network Error or any other error');
+        }
 
-        Register::where('r_id',$id)->delete();
-
-        Mail::to($user->email)->send(new RegisterMail($mail_data));
         return redirect()->back()->with('success', 'User Accepted Successfully');
 
     }
