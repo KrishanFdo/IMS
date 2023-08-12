@@ -88,9 +88,24 @@
                         {{ session('mailerror') }}
                     </div>
                 @endif
-
+                <br>
+                <label style="margin-left: 10px; color:rgb(38, 0, 255)">Select The Batch: </label>
+                <select id="yearFilter" onchange="applyYearFilter()" style="margin-left: 10px; width: 180px;">
+                    <option value="" selected>All</option>
+                    <option value="2018">SC/2018</option>
+                    <option value="2019">SC/2019</option>
+                    <!-- Add more options for different years -->
+                </select>
+                <br><br>
                 @foreach($data as $item)
-                <div class="user-tile">
+                @php
+                    // Extract year and number from scnum
+                    $scParts = explode('/', $item->r_scnum);
+                    $scYear = $scParts[1];
+                    $scNumber = $scParts[2];
+
+                @endphp
+                <div class="user-tile" data-year="{{ $scYear }}">
                     <div class="user-avatar">
                         <div style="display: flex;">
                         <img src="{{ asset('storage/'.$item->r_imgpath) }}" alt="User Avatar">
@@ -154,6 +169,23 @@
 
                 </div>
                 @endforeach
+                </div>
+                <script>
+                    function applyYearFilter() {
+                        var selectedYear = document.getElementById('yearFilter').value;
+                        var userDivs = document.getElementsByClassName('user-tile');
+
+                        for (var i = 0; i < userDivs.length; i++) {
+                            var userYear = userDivs[i].getAttribute('data-year');
+
+                            if (selectedYear === '' || selectedYear === userYear) {
+                                userDivs[i].style.display = 'block';
+                            } else {
+                                userDivs[i].style.display = 'none';
+                            }
+                        }
+                    }
+                </script>
 
     </div>
    </div>
