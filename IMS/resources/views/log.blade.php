@@ -22,7 +22,7 @@
 
             <form action="<?=url('/authenticate')?>" method="POST">
             <div class="form-reg shadow p-3 mb-5 bg-white rounded">
-                <h5 class="welcome-text text-center">WELCOME TO DCS INFORMATION SYSTEM</h5>
+                <h5 class="welcome-text text-center">WELCOME TO Allumna-DCS</h5>
                 @if (session('error'))
                 <div class="alert alert-success">
                     {{ session('error') }}
