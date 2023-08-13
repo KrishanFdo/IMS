@@ -10,7 +10,7 @@
         <tr>
             <td>
                 <p>
-                    Dear All,<br>
+                    Dear {{ $mail_data['user']->fname }},<br>
                     {{ $mail_data['content'] }}<br>
                     Thank You Best Regards!
                 </p>

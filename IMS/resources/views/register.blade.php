@@ -40,7 +40,7 @@
   <div >
     <div>
       <div>
-        <h1 class="fs-8 ms-6 name" style="text-align: center"><span class="text" >Department Of Computer Science  - Univesity Of Ruhuna </span></h1>
+        <h1 class="fs-8 ms-6 name" style="text-align: center"><span class="text" >Allumna - Department Of Computer Science - Univesity Of Ruhuna</span></h1>
 
       </div>
     </div>
