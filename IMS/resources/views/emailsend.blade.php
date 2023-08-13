@@ -80,19 +80,40 @@
           </nav>
 
           <div class="dashboard-content ms-5 px-3 pt-4">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if (session('mailerror'))
+                <div class="alert alert-danger">
+                    {{ session('mailerror') }}
+                </div>
+            @endif
             <div class="jumbotron">
             <form class="form-group" action="<?=url('/sendmail')?>" method="POST" enctype='multipart/form-data'>
                     <table class="table table-borderless">
                         <thead></thead>
 
                         <tbody>
-
                             <tr>
-                                <td scope="col" class=" text text-sm">Role</td>
+                                <td>
+                                    <label style="color: blue">Batch </label>
+                                    <select class="form-select" name="batch">
+                                        <option value="all" selected>All</option>
+                                        <option value="2018">SC/2018</option>
+                                        <option value="2019">SC/2019</option>
+                                        <!-- Add more options for different years -->
+                                    </select>
+                                    @error('batch')
+                                    <div class="alert alert-danger">Batch is Required</div>
+                                    @enderror
+                                </td>
                             </tr>
                                 <tr>
 
                                <td>
+                                <label style="color: blue">Role </label><br>
                                 <input type="radio" id="role" name="role" value="BCS General"/> BCS General
                                 <br>
                                 <input type="radio" id="role" name="role" value="BCS Special"/> BCS Special
@@ -103,18 +124,14 @@
                                 <br/>
                                 <input type="radio" id="role" name="role" value="all"/> All
                                 @error('role')
-                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    <div class="alert alert-danger">Role is required</div>
                                 @enderror
                                </td>
 
                             </tr>
-
-                            <tr>
-                                <td scope="col" class=" text text-sm align-left">Country</td>
-
-                            </tr>
                                 <tr>
                                         <td>
+                                            <label style="color: blue">Country </label>
                                             <select class="form-select" aria-label="" name="country" id="select_list">
                                                 <option value="all" selected>All</option>
                                                 <option value="Afghanistan">Afghanistan</option>
@@ -365,6 +382,24 @@
                                         </td>
 
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <label style="color: blue">Subject </label>
+                                        <input type="text" class="form-control " placeholder="Subject" name="subject">
+                                        @error('subject')
+                                            <div class="alert alert-danger">Subject is Required</div>
+                                        @enderror
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label style="color: blue">Message </label><br>
+                                        <textarea name="content" rows="12" cols="70"></textarea>
+                                        @error('content')
+                                            <div class="alert alert-danger">Message is Required</div>
+                                        @enderror
+                                    </td>
+                                </tr>
                             <tr>
 
                                 <td class="text">
@@ -372,6 +407,7 @@
                                     <input type="submit" name="submit" value="    SEND EMAILS   " class="btn btn-primary mt-2">
 
                                 </td>
+                            </tr>
 
                         </tbody>
 
