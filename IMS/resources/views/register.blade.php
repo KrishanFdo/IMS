@@ -143,7 +143,7 @@
                     <label class="mt-2">Position</label>
                     <select class="form-select" aria-label="" name="position" id="select_list">
                       <option value="" disabled selected>Select an option...</option>
-                      <option value="University Lecturer ">University Lecturer </option>
+                      <option value="Lecturer">Lecturer</option>
                       <option value="Software Developer">Software Developer</option>
                       <option value="UX Designer">UX Designer</option>
                       <option value="Mobile App Developer">Mobile App Developer</option>
@@ -154,6 +154,8 @@
                       <option value="Computer Hardware Engineer">Computer Hardware Engineer</option>
                       <option value="Video Game Developer">Video Game Developer</option>
                       <option value="UX Designer">UX Designer</option>
+                      <option value="ICT Teacher">ICT Teacher</option>
+                      <option value="Instructor">Instructor</option>
                       <option value="Other">Other</option>
                     </select>
                     <br>
