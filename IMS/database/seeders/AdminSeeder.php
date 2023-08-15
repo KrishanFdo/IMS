@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
             'fname'=>'Aruna',
             'lname'=>'Lorensuhewa',
             'email'=>'aruna@dcs.ruh.ac.lk',
-            'password'=>Hash::make('aruna@dcs')
+            'password'=>Hash::make('aruna@dcs01')
         ]);
 
         Admin::create([
