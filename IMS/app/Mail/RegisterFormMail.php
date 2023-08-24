@@ -28,7 +28,7 @@ class RegisterFormMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Registration to IMS-DCS',
+            subject: 'Registration to Allumna-DCS',
         );
     }
 
