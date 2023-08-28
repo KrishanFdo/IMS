@@ -20,7 +20,7 @@ class UserController extends Controller
         $id = $request->input('id');
         $u = Register::where('r_id',$id)->first(); //$u is user to be accepted
 
-        $mail_data['message'] = "You registration has been accepted. Here your username and password for Allumna-DCS";
+        $mail_data['message'] = "You registration has been accepted. Here your username and password for Alumna-DCS";
         $mail_data['username'] = $u->r_email;
         $mail_data['password'] = Str::random(8);
 

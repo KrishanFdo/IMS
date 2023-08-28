@@ -24,7 +24,7 @@
    <div class="main-container d-flex">
     <div class="sidebar " id="side_nav">
          <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
-            <h1 class="fs-3 ms-2 name"><span class="text">Allumna-DCS</span></h1>
+            <h1 class="fs-3 ms-2 name"><span class="text">Alumna-DCS</span></h1>
             <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="fa-solid fa-bars-staggered"></i></button>
         </div>
 

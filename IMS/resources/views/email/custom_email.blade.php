@@ -17,7 +17,9 @@
             </td>
 
         </tr>
-    </table>
+    </table><br><br>
+
+    <p><?php echo "Please Don't reply to this email"; ?></p>
 
 </body>
 

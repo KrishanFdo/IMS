@@ -28,7 +28,7 @@ class RemoveMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Rejection of Registration to Allumna-DCS',
+            subject: 'Alumna-DCS: Rejection of Registration',
         );
     }
 

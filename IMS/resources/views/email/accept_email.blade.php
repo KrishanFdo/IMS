@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>IMS Register Acceptence</title>
+    <title>Alumna-DCS Register Acceptence</title>
 </head>
 
 <body>
@@ -20,7 +20,8 @@
             <td>{{ $mail_data['password'] }}</td>
         </tr>
 
-    </table>
+    </table><br><br>
+    <p><?php echo "Please Don't reply to this email"; ?></p>
 
 </body>
 
