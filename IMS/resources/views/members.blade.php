@@ -78,7 +78,7 @@
           </nav>
                 @if($users->isEmpty())
                     <div class="alert alert-danger">
-                        <p>NO USERS FOR APPLIED FILTER</p>
+                        <p>NO USERS AVAILABLE</p>
                     </div>
                 @endif
                 <br>

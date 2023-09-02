@@ -88,37 +88,59 @@
                         {{ session('mailerror') }}
                     </div>
                 @endif
+                @if($data->isEmpty())
+                    <div class="alert alert-danger">
+                        <p>NO USERS AVAILABLE</p>
+                    </div>
+                @endif
                 <br>
-                <label style="margin-left: 10px; color:rgb(38, 0, 255)">Select The Batch: </label>
-                <select id="yearFilter" onchange="applyYearFilter()" style="margin-left: 10px; width: 180px;">
-                    <option value="" selected>All</option>
-                    <option value="2005">SC/2005</option>
-                    <option value="2006">SC/2006</option>
-                    <option value="2007">SC/2007</option>
-                    <option value="2008">SC/2008</option>
-                    <option value="2009">SC/2009</option>
-                    <option value="2010">SC/2010</option>
-                    <option value="2011">SC/2011</option>
-                    <option value="2012">SC/2012</option>
-                    <option value="2013">SC/2013</option>
-                    <option value="2014">SC/2014</option>
-                    <option value="2015">SC/2015</option>
-                    <option value="2016">SC/2016</option>
-                    <option value="2017">SC/2017</option>
-                    <option value="2018">SC/2018</option>
-                    <option value="2019">SC/2019</option>
-                    <option value="2020">SC/2020</option>
-                </select>
-                <br><br>
-                @foreach($data as $item)
-                @php
-                    // Extract year and number from scnum
-                    $scParts = explode('/', $item->r_scnum);
-                    $scYear = $scParts[1];
-                    $scNumber = $scParts[2];
+                <form style="margin-left: 5px;" class="form-group" action="<?=url('/filtered-registers')?>" method="GET">
+                    <div style=" display: flex;">
+                        <div>
+                            <label for="scnumber">Batch</label>
+                            <select class="form-select" name="scnumber" style="width: 200px">
+                                <option value="">All</option>
+                                @foreach ($scnums as $scnum)
+                                    <option value="{{ $scnum }}">SC/{{ $scnum }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <label for="role">Role</label>
+                            <select class="form-select" name="role" style="width: 200px">
+                                <option value="">All</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role }}">{{ $role }}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                @endphp
-                <div class="user-tile" data-year="{{ $scYear }}">
+                        <div style="margin-left: 10px;">
+                            <label for="position">Position</label>
+                            <select class="form-select" name="position" style="width: 200px">
+                                <option value="">All</option>
+                                @foreach ($positions as $position)
+                                    <option value="{{ $position }}">{{ $position }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div style="margin-left: 10px;">
+                            <label for="workplace">Workplace</label>
+                            <select class="form-select" name="workplace" style="width: 200px">
+                                <option value="">All</option>
+                                @foreach ($workplaces as $workplace)
+                                    <option value="{{ $workplace }}">{{ $workplace }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Apply Filters</button>
+                </form>
+                <br>
+                @foreach($data as $item)
+                <div class="user-tile">
                     <div class="user-avatar">
                         <div style="display: flex;">
                         <img src="{{ asset('storage/'.$item->r_imgpath) }}" alt="User Avatar">
@@ -183,22 +205,6 @@
                 </div>
                 @endforeach
                 </div>
-                <script>
-                    function applyYearFilter() {
-                        var selectedYear = document.getElementById('yearFilter').value;
-                        var userDivs = document.getElementsByClassName('user-tile');
-
-                        for (var i = 0; i < userDivs.length; i++) {
-                            var userYear = userDivs[i].getAttribute('data-year');
-
-                            if (selectedYear === '' || selectedYear === userYear) {
-                                userDivs[i].style.display = 'block';
-                            } else {
-                                userDivs[i].style.display = 'none';
-                            }
-                        }
-                    }
-                </script>
 
     </div>
    </div>

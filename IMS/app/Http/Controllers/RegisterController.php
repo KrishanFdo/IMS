@@ -139,7 +139,17 @@ class RegisterController extends Controller
 
     public function admin_accept(){
         $data = Register::all();
-        return view('adminaccept', compact('data'));
+        $roles = Register::distinct()->pluck('r_role');
+        $positions = Register::distinct()->pluck('r_position');
+        $workplaces = Register::distinct()->pluck('r_workplace');
+        $scnums=[];
+        $scnumbers = Register::distinct()->pluck('r_scnum');
+        foreach($scnumbers as $scnum){
+            $scParts = explode('/', $scnum);
+            if(!in_array($scParts[1],$scnums))
+                array_push($scnums,$scParts[1]);
+        }
+        return view('adminaccept', compact('data','roles','positions','workplaces','scnums'));
     }
 
     public function delete_register(Request $request){
@@ -163,6 +173,65 @@ class RegisterController extends Controller
 
         return redirect()->back()->with('success', 'Record Removed successfully.');
 
+    }
+
+    public function filtered_registers(Request $request)
+    {
+        $query = Register::query();
+        $flag=0;
+        // Apply filters based on user selections
+
+        if ($request->has('role')) {
+            if($request->input('role')!=""){
+                $query->where('r_role', $request->input('role'));
+                $flag = 1;
+            }
+        }
+
+        if ($request->has('position')) {
+            if($request->input('position')!=""){
+                $query->where('r_position', $request->input('position'));
+                $flag = 1;
+            }
+        }
+
+        if ($request->has('workplace')) {
+            if($request->input('workplace')!=""){
+                $query->where('r_workplace', $request->input('workplace'));
+                $flag = 1;
+            }
+        }
+
+        // Add more conditions for other filters (position, workplace, qualifications)
+
+        $data = $query->get();
+
+        if ($request->has('scnumber')) {
+            if($request->input('scnumber')!=""){
+                foreach($data as $key=>$user){
+                    $scParts = explode('/', $user['r_scnum']);
+                    if($request->input('scnumber')!=$scParts[1]){
+                        unset($data[$key]);
+                    }
+                }
+                $flag = 1;
+            }
+        }
+        if($flag==0){
+            $data=Register::all();
+        }
+
+        $scnums=[];
+        $scnumbers = Register::distinct()->pluck('r_scnum');
+        foreach($scnumbers as $scnum){
+            $scParts = explode('/', $scnum);
+            if(!in_array($scParts[1],$scnums))
+                array_push($scnums,$scParts[1]);
+        }
+        $roles = Register::distinct()->pluck('r_role');
+        $positions = Register::distinct()->pluck('r_position');
+        $workplaces = Register::distinct()->pluck('r_workplace');
+        return view('adminaccept', compact('data','roles','positions','workplaces','scnums'));
     }
 
 }

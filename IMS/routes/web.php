@@ -39,6 +39,7 @@ Route::get('/login', function () {
 Route::post('/register-submit',[RegisterController::class,'register']);
 Route::get('/admin-accept',[RegisterController::class,'admin_accept'])->middleware('auth:webadmin');
 Route::delete('/delete-register',[RegisterController::class,'delete_register'])->middleware('auth:webadmin');
+Route::get('/filtered-registers', [RegisterController::class,'filtered_registers'])->middleware('auth:webadmin');
 
 Route::post('/accept',[UserController::class,'accept'])->middleware('auth:webadmin');
 Route::get('/users',[UserController::class,'users'])->middleware('auth:webadmin');
