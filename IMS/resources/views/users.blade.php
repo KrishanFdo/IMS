@@ -111,7 +111,7 @@
                 </select>
                 <br><br>
                 <div id="filteredUsers">
-                @foreach($data as $item)
+                @foreach($users as $item)
                 @php
                     // Extract year and number from scnum
                     $scParts = explode('/', $item->scnum);

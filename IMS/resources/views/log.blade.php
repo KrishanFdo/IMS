@@ -24,7 +24,7 @@
             <div class="form-reg shadow p-3 mb-5 bg-white rounded">
                 <h5 class="welcome-text text-center">WELCOME TO Alumna-DCS</h5>
                 @if (session('error'))
-                <div class="alert alert-success">
+                <div class="alert alert-danger">
                     {{ session('error') }}
                 </div>
             @endif

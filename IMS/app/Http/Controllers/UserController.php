@@ -56,8 +56,12 @@ class UserController extends Controller
 
 
     public function users(){
-        $data = User::all();
-        return view('users', compact('data'));
+        $users = User::all();
+        $scnumbers = User::distinct()->pluck('scnum');
+        $roles = User::distinct()->pluck('role');
+        $positions = User::distinct()->pluck('position');
+        $workplaces = User::distinct()->pluck('workplace');
+        return view('users', compact('users','scnumbers','roles','positions','workplaces'));
     }
 
     public function members(){
