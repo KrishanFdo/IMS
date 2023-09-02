@@ -88,34 +88,21 @@
                         {{ session('mailerror') }}
                     </div>
                 @endif
+                @if($users->isEmpty())
+                    <div class="alert alert-danger">
+                        <p>NO USERS FOR APPLIED FILTER</p>
+                    </div>
+                @endif
                 <br>
                 <form style="margin-left: 5px;" class="form-group" action="<?=url('/filtered-users')?>" method="GET">
                     <div style=" display: flex;">
                         <div>
                             <label for="scnumber">Batch</label>
-                            <select name="scnumber" class="form-select" style="width: 200px">
+                            <select class="form-select" name="scnumber" style="width: 200px">
                                 <option value="">All</option>
-                                <option value="2000">SC/2000</option>
-                                <option value="2001">SC/2001</option>
-                                <option value="2002">SC/2002</option>
-                                <option value="2003">SC/2003</option>
-                                <option value="2004">SC/2004</option>
-                                <option value="2005">SC/2005</option>
-                                <option value="2006">SC/2006</option>
-                                <option value="2007">SC/2007</option>
-                                <option value="2008">SC/2008</option>
-                                <option value="2009">SC/2009</option>
-                                <option value="2010">SC/2010</option>
-                                <option value="2011">SC/2011</option>
-                                <option value="2012">SC/2012</option>
-                                <option value="2013">SC/2013</option>
-                                <option value="2014">SC/2014</option>
-                                <option value="2015">SC/2015</option>
-                                <option value="2016">SC/2016</option>
-                                <option value="2017">SC/2017</option>
-                                <option value="2018">SC/2018</option>
-                                <option value="2019">SC/2019</option>
-                                <option value="2020">SC/2020</option>
+                                @foreach ($scnums as $scnum)
+                                    <option value="{{ $scnum }}">SC/{{ $scnum }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div style="margin-left: 10px;">
@@ -190,7 +177,7 @@
 
                     <div style="display: flex;">
                         <div>
-                        <p><b>SC-Number:</b>{{ $item->scnum }}</p>
+                        <p><b>SC-Number: </b>{{ $item->scnum }}</p>
                         <p><b>Email:</b> {{ $item->email }}</p>
                         <p><b>Mobile:</b> {{ $item->mobile }}</p>
                         <p><b>WhatsApp Mobile:</b> {{ $item->wmobile }}</p>

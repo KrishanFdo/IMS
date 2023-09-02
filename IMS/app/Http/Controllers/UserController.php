@@ -60,7 +60,14 @@ class UserController extends Controller
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
         $workplaces = User::distinct()->pluck('workplace');
-        return view('users', compact('users','roles','positions','workplaces'));
+        $scnums=[];
+        $scnumbers = User::distinct()->pluck('scnum');
+        foreach($scnumbers as $scnum){
+            $scParts = explode('/', $scnum);
+            if(!in_array($scParts[1],$scnums))
+                array_push($scnums,$scParts[1]);
+        }
+        return view('users', compact('users','roles','positions','workplaces','scnums'));
     }
 
     public function members(){
@@ -68,7 +75,14 @@ class UserController extends Controller
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
         $workplaces = User::distinct()->pluck('workplace');
-        return view('members', compact('users','roles','positions','workplaces'));
+        $scnums=[];
+        $scnumbers = User::distinct()->pluck('scnum');
+        foreach($scnumbers as $scnum){
+            $scParts = explode('/', $scnum);
+            if(!in_array($scParts[1],$scnums))
+                array_push($scnums,$scParts[1]);
+        }
+        return view('members', compact('users','roles','positions','workplaces','scnums'));
     }
 
     public function delete_user(Request $request){
@@ -139,10 +153,17 @@ class UserController extends Controller
             $users=User::all();
         }
 
+        $scnums=[];
+        $scnumbers = User::distinct()->pluck('scnum');
+        foreach($scnumbers as $scnum){
+            $scParts = explode('/', $scnum);
+            if(!in_array($scParts[1],$scnums))
+                array_push($scnums,$scParts[1]);
+        }
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
         $workplaces = User::distinct()->pluck('workplace');
-        return view('users', compact('users','roles','positions','workplaces'));
+        return view('users', compact('users','roles','positions','workplaces','scnums'));
     }
 
     public function filtered_members(Request $request)
@@ -190,11 +211,17 @@ class UserController extends Controller
         if($flag==0){
             $users=User::all();
         }
-
+        $scnums=[];
+        $scnumbers = User::distinct()->pluck('scnum');
+        foreach($scnumbers as $scnum){
+            $scParts = explode('/', $scnum);
+            if(!in_array($scParts[1],$scnums))
+                array_push($scnums,$scParts[1]);
+        }
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
         $workplaces = User::distinct()->pluck('workplace');
-        return view('members', compact('users','roles','positions','workplaces'));
+        return view('members', compact('users','roles','positions','workplaces','scnums'));
     }
 
 }
