@@ -38,12 +38,14 @@ Route::get('/login', function () {
 
 Route::post('/register-submit',[RegisterController::class,'register']);
 Route::get('/admin-accept',[RegisterController::class,'admin_accept'])->middleware('auth:webadmin');
-Route::delete('/delete-register',[RegisterController::class,'delete_register']);
+Route::delete('/delete-register',[RegisterController::class,'delete_register'])->middleware('auth:webadmin');
 
-Route::post('/accept',[UserController::class,'accept']);
+Route::post('/accept',[UserController::class,'accept'])->middleware('auth:webadmin');
 Route::get('/users',[UserController::class,'users'])->middleware('auth:webadmin');
 Route::get('/members',[UserController::class,'members'])->middleware('auth:web');
-Route::delete('/delete-user',[UserController::class,'delete_user']);
+Route::delete('/delete-user',[UserController::class,'delete_user'])->middleware('auth:webadmin');
+Route::get('/filtered-users', [UserController::class,'filtered_users'])->middleware('auth:webadmin');
+Route::get('/filtered-members', [UserController::class,'filtered_members'])->middleware('auth:web');
 
 Route::post('/authenticate',[LoginController::class,'authenticate']);
 Route::post('/logout',[LoginController::class,'logout']);
@@ -54,5 +56,5 @@ Route::get('/emailsend',function(){
 })->middleware('auth:webadmin');
 
 
-Route::post('/sendmail',[MailController::class,'sendmail']);
+Route::post('/sendmail',[MailController::class,'sendmail'])->middleware('auth:webadmin');
 
