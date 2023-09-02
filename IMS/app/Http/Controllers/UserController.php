@@ -57,16 +57,18 @@ class UserController extends Controller
 
     public function users(){
         $users = User::all();
-        $scnumbers = User::distinct()->pluck('scnum');
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
         $workplaces = User::distinct()->pluck('workplace');
-        return view('users', compact('users','scnumbers','roles','positions','workplaces'));
+        return view('users', compact('users','roles','positions','workplaces'));
     }
 
     public function members(){
-        $data = User::all();
-        return view('members', compact('data'));
+        $users = User::all();
+        $roles = User::distinct()->pluck('role');
+        $positions = User::distinct()->pluck('position');
+        $workplaces = User::distinct()->pluck('workplace');
+        return view('members', compact('users','roles','positions','workplaces'));
     }
 
     public function delete_user(Request $request){
@@ -90,4 +92,109 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'User Removed successfully.');
 
     }
+
+    public function filtered_users(Request $request)
+    {
+        $query = User::query();
+        $flag=0;
+        // Apply filters based on user selections
+
+        if ($request->has('role')) {
+            if($request->input('role')!=""){
+                $query->where('role', $request->input('role'));
+                $flag = 1;
+            }
+        }
+
+        if ($request->has('position')) {
+            if($request->input('position')!=""){
+                $query->where('position', $request->input('position'));
+                $flag = 1;
+            }
+        }
+
+        if ($request->has('workplace')) {
+            if($request->input('workplace')!=""){
+                $query->where('workplace', $request->input('workplace'));
+                $flag = 1;
+            }
+        }
+
+        // Add more conditions for other filters (position, workplace, qualifications)
+
+        $users = $query->get();
+
+        if ($request->has('scnumber')) {
+            if($request->input('scnumber')!=""){
+                foreach($users as $key=>$user){
+                    $scParts = explode('/', $user['scnum']);
+                    if($request->input('scnumber')!=$scParts[1]){
+                        unset($users[$key]);
+                    }
+                }
+                $flag = 1;
+            }
+        }
+        if($flag==0){
+            $users=User::all();
+        }
+
+        $roles = User::distinct()->pluck('role');
+        $positions = User::distinct()->pluck('position');
+        $workplaces = User::distinct()->pluck('workplace');
+        return view('users', compact('users','roles','positions','workplaces'));
+    }
+
+    public function filtered_members(Request $request)
+    {
+        $query = User::query();
+        $flag=0;
+        // Apply filters based on user selections
+
+        if ($request->has('role')) {
+            if($request->input('role')!=""){
+                $query->where('role', $request->input('role'));
+                $flag = 1;
+            }
+        }
+
+        if ($request->has('position')) {
+            if($request->input('position')!=""){
+                $query->where('position', $request->input('position'));
+                $flag = 1;
+            }
+        }
+
+        if ($request->has('workplace')) {
+            if($request->input('workplace')!=""){
+                $query->where('workplace', $request->input('workplace'));
+                $flag = 1;
+            }
+        }
+
+        // Add more conditions for other filters (position, workplace, qualifications)
+
+        $users = $query->get();
+
+        if ($request->has('scnumber')) {
+            if($request->input('scnumber')!=""){
+                foreach($users as $key=>$user){
+                    $scParts = explode('/', $user['scnum']);
+                    if($request->input('scnumber')!=$scParts[1]){
+                        unset($users[$key]);
+                    }
+                }
+                $flag = 1;
+            }
+        }
+        if($flag==0){
+            $users=User::all();
+        }
+
+        $roles = User::distinct()->pluck('role');
+        $positions = User::distinct()->pluck('position');
+        $workplaces = User::distinct()->pluck('workplace');
+        return view('members', compact('users','roles','positions','workplaces'));
+    }
+
 }
