@@ -138,6 +138,10 @@ class RegisterController extends Controller
     }
 
     public function admin_accept(){
+        $selectedrole = "";
+        $selectedscnum = "";
+        $selectedposition = "";
+        $selectedworkplace = "";
         $data = Register::all();
         $roles = Register::distinct()->pluck('r_role');
         $positions = Register::distinct()->pluck('r_position');
@@ -149,7 +153,9 @@ class RegisterController extends Controller
             if(!in_array($scParts[1],$scnums))
                 array_push($scnums,$scParts[1]);
         }
-        return view('adminaccept', compact('data','roles','positions','workplaces','scnums'));
+        return view('adminaccept',
+         compact('data','roles','positions','workplaces','scnums',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
     }
 
     public function delete_register(Request $request){
@@ -180,6 +186,10 @@ class RegisterController extends Controller
         $query = Register::query();
         $flag=0;
         // Apply filters based on user selections
+        $selectedrole = $request->input('role');
+        $selectedscnum = $request->input('scnumber');
+        $selectedposition = $request->input('position');
+        $selectedworkplace = $request->input('workplace');
 
         if ($request->has('role')) {
             if($request->input('role')!=""){
@@ -231,7 +241,9 @@ class RegisterController extends Controller
         $roles = Register::distinct()->pluck('r_role');
         $positions = Register::distinct()->pluck('r_position');
         $workplaces = Register::distinct()->pluck('r_workplace');
-        return view('adminaccept', compact('data','roles','positions','workplaces','scnums'));
+        return view('adminaccept',
+         compact('data','roles','positions','workplaces','scnums',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
     }
 
 }

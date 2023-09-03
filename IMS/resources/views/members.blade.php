@@ -89,7 +89,7 @@
                             <select class="form-select" name="scnumber" style="width: 200px">
                                 <option value="">All</option>
                                 @foreach ($scnums as $scnum)
-                                    <option value="{{ $scnum }}">SC/{{ $scnum }}</option>
+                                    <option value="{{ $scnum }}" {{ $selectedscnum == $scnum ? 'selected' : '' }}>SC/{{ $scnum }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -98,7 +98,7 @@
                             <select class="form-select" name="role" style="width: 200px">
                                 <option value="">All</option>
                                 @foreach ($roles as $role)
-                                    <option value="{{ $role }}">{{ $role }}</option>
+                                    <option value="{{ $role }}" {{ $selectedrole == $role ? 'selected' : '' }}>{{ $role }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -108,7 +108,7 @@
                             <select class="form-select" name="position" style="width: 200px">
                                 <option value="">All</option>
                                 @foreach ($positions as $position)
-                                    <option value="{{ $position }}">{{ $position }}</option>
+                                    <option value="{{ $position }}" {{ $selectedposition == $position ? 'selected' : '' }}>{{ $position }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -118,13 +118,20 @@
                             <select class="form-select" name="workplace" style="width: 200px">
                                 <option value="">All</option>
                                 @foreach ($workplaces as $workplace)
-                                    <option value="{{ $workplace }}">{{ $workplace }}</option>
+                                    <option value="{{ $workplace }}" {{ $selectedworkplace == $workplace ? 'selected' : '' }}>{{ $workplace }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Apply Filters</button>
+                    <button type="reset" id="customResetButton" class="btn btn-secondary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Reset</button>
+                    <script>
+                        document.getElementById('customResetButton').addEventListener('click', function() {
+                            // Perform the desired action when the reset button is clicked
+                            window.location.href = "<?=url('/members')?>";
+                        });
+                    </script>
                 </form>
             <br>
 
