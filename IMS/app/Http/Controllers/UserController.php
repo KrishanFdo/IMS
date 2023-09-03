@@ -56,6 +56,10 @@ class UserController extends Controller
 
 
     public function users(){
+        $selectedrole = "";
+        $selectedscnum = "";
+        $selectedposition = "";
+        $selectedworkplace = "";
         $users = User::all();
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
@@ -67,10 +71,16 @@ class UserController extends Controller
             if(!in_array($scParts[1],$scnums))
                 array_push($scnums,$scParts[1]);
         }
-        return view('users', compact('users','roles','positions','workplaces','scnums'));
+        return view('users',
+         compact('users','roles','positions','workplaces','scnums',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
     }
 
     public function members(){
+        $selectedrole = "";
+        $selectedscnum = "";
+        $selectedposition = "";
+        $selectedworkplace = "";
         $users = User::all();
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
@@ -82,7 +92,9 @@ class UserController extends Controller
             if(!in_array($scParts[1],$scnums))
                 array_push($scnums,$scParts[1]);
         }
-        return view('members', compact('users','roles','positions','workplaces','scnums'));
+        return view('members',
+         compact('users','roles','positions','workplaces','scnums',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
     }
 
     public function delete_user(Request $request){
@@ -112,6 +124,10 @@ class UserController extends Controller
         $query = User::query();
         $flag=0;
         // Apply filters based on user selections
+        $selectedrole = $request->input('role');
+        $selectedscnum = $request->input('scnumber');
+        $selectedposition = $request->input('position');
+        $selectedworkplace = $request->input('workplace');
 
         if ($request->has('role')) {
             if($request->input('role')!=""){
@@ -163,7 +179,9 @@ class UserController extends Controller
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
         $workplaces = User::distinct()->pluck('workplace');
-        return view('users', compact('users','roles','positions','workplaces','scnums'));
+        return view('users',
+         compact('users','roles','positions','workplaces','scnums',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
     }
 
     public function filtered_members(Request $request)
@@ -171,6 +189,10 @@ class UserController extends Controller
         $query = User::query();
         $flag=0;
         // Apply filters based on user selections
+        $selectedrole = $request->input('role');
+        $selectedscnum = $request->input('scnumber');
+        $selectedposition = $request->input('position');
+        $selectedworkplace = $request->input('workplace');
 
         if ($request->has('role')) {
             if($request->input('role')!=""){
@@ -221,7 +243,9 @@ class UserController extends Controller
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
         $workplaces = User::distinct()->pluck('workplace');
-        return view('members', compact('users','roles','positions','workplaces','scnums'));
+        return view('members',
+         compact('users','roles','positions','workplaces','scnums',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
     }
 
 }
