@@ -140,8 +140,8 @@ class RegisterController extends Controller
     public function admin_accept(){
         $selectedrole = "";
         $selectedscnum = "";
-        $selectedposition = "";
-        $selectedworkplace = "";
+        $selectedposition = "All";
+        $selectedworkplace = "All";
         $data = Register::all();
         $roles = Register::distinct()->pluck('r_role');
         $positions = Register::distinct()->pluck('r_position');
@@ -199,14 +199,14 @@ class RegisterController extends Controller
         }
 
         if ($request->has('position')) {
-            if($request->input('position')!=""){
+            if($request->input('position')!="All"){
                 $query->where('r_position', $request->input('position'));
                 $flag = 1;
             }
         }
 
         if ($request->has('workplace')) {
-            if($request->input('workplace')!=""){
+            if($request->input('workplace')!="All"){
                 $query->where('r_workplace', $request->input('workplace'));
                 $flag = 1;
             }

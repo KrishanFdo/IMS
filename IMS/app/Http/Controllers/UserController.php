@@ -79,8 +79,8 @@ class UserController extends Controller
     public function members(){
         $selectedrole = "";
         $selectedscnum = "";
-        $selectedposition = "";
-        $selectedworkplace = "";
+        $selectedposition = "All";
+        $selectedworkplace = "All";
         $users = User::all();
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
@@ -202,14 +202,14 @@ class UserController extends Controller
         }
 
         if ($request->has('position')) {
-            if($request->input('position')!=""){
+            if($request->input('position')!="All"){
                 $query->where('position', $request->input('position'));
                 $flag = 1;
             }
         }
 
         if ($request->has('workplace')) {
-            if($request->input('workplace')!=""){
+            if($request->input('workplace')!="All"){
                 $query->where('workplace', $request->input('workplace'));
                 $flag = 1;
             }
