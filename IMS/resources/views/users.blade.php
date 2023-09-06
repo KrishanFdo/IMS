@@ -117,12 +117,7 @@
 
                         <div style="margin-left: 10px;">
                             <label for="position">Position</label>
-                            <select class="form-select" name="position" style="width: 200px">
-                                <option value="">All</option>
-                                @foreach ($positions as $position)
-                                    <option value="{{ $position }}" {{ $selectedposition == $position ? 'selected' : '' }}>{{ $position }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" id="position" name="position" style="width: 200px">
                         </div>
 
                         <div style="margin-left: 10px;">
