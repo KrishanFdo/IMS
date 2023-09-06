@@ -12,6 +12,7 @@
     <link href="{{ asset('css/userlist.css') }}" rel="stylesheet">
     <link href="{{ asset('css/usertiles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/button.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/searchoptions.css') }}" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
@@ -117,8 +118,14 @@
 
                         <div style="margin-left: 10px;">
                             <label for="position">Position</label>
-                            <input type="text" class="form-control" id="position" name="position" style="width: 200px">
+                            <input type="text" class="form-control" id="position" name="position" style="width: 200px" value="{{ $selectedposition }}">
+                            <div class="position-select" id="position-select">
+                                <div class="select-positions">
+                                    <!-- Dynamic options will be inserted here -->
+                                </div>
+                            </div>
                         </div>
+
 
                         <div style="margin-left: 10px;">
                             <label for="workplace">Workplace</label>
@@ -134,6 +141,41 @@
                     <button type="submit" class="btn btn-primary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Apply Filters</button>
                     <button type="reset" id="customResetButton" class="btn btn-secondary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Reset</button>
                     <script>
+                        const searchposition = document.getElementById('position');
+                        const positionSelect = document.getElementById('position-select');
+                        const selectpositions = positionSelect.querySelector('.select-positions');
+
+                        //list of options
+                        const positions = [
+                            @foreach ($positions as $position)
+                                "{{ $position }}",
+                            @endforeach
+                        ];
+
+                        searchposition.addEventListener('input', function () {
+                            const searchValue = this.value.toLowerCase();
+                            const filtered = positions.filter(option => option.toLowerCase().includes(searchValue));
+
+                            // Generate HTML for filtered options
+                            const html = filtered.map(option => `<div>${option}</div>`).join('');
+                            selectpositions.innerHTML = html;
+
+                            // Show/hide the filtered options container
+                            if (searchValue.length > 0) {
+                                positionSelect.style.display = 'block';
+                            } else {
+                                positionSelect.style.display = 'none';
+                            }
+                        });
+
+                        // Handle option selection
+                        positionSelect.addEventListener('click', function (event) {
+                            if (event.target.tagName === 'DIV') {
+                                searchposition.value = event.target.textContent;
+                                positionSelect.style.display = 'none';
+                            }
+                        });
+
                         document.getElementById('customResetButton').addEventListener('click', function() {
                             // Perform the desired action when the reset button is clicked
                             window.location.href = "<?=url('/users')?>";
