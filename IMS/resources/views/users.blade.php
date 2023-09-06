@@ -126,21 +126,26 @@
                             </div>
                         </div>
 
-
                         <div style="margin-left: 10px;">
                             <label for="workplace">Workplace</label>
-                            <select class="form-select" name="workplace" style="width: 200px">
-                                <option value="">All</option>
-                                @foreach ($workplaces as $workplace)
-                                    <option value="{{ $workplace }}" {{ $selectedworkplace == $workplace ? 'selected' : '' }}>{{ $workplace }}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" id="workplace" name="workplace" style="width: 200px" value="{{ $selectedworkplace }}">
+                            <div class="workplace-select" id="workplace-select">
+                                <div class="select-workplaces">
+                                    <!-- Dynamic options will be inserted here -->
+                                </div>
+                            </div>
                         </div>
+
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Apply Filters</button>
                     <button type="reset" id="customResetButton" class="btn btn-secondary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Reset</button>
                     <script>
+                        document.getElementById('customResetButton').addEventListener('click', function() {
+                            // Perform the desired action when the reset button is clicked
+                            window.location.href = "<?=url('/users')?>";
+                        });
+
                         const searchposition = document.getElementById('position');
                         const positionSelect = document.getElementById('position-select');
                         const selectpositions = positionSelect.querySelector('.select-positions');
@@ -176,9 +181,40 @@
                             }
                         });
 
-                        document.getElementById('customResetButton').addEventListener('click', function() {
-                            // Perform the desired action when the reset button is clicked
-                            window.location.href = "<?=url('/users')?>";
+                        //serach workplaces
+                        const searchworkplace = document.getElementById('workplace');
+                        const workplaceSelect = document.getElementById('workplace-select');
+                        const selectworkplaces = workplaceSelect.querySelector('.select-workplaces');
+
+                        //list of options
+                        const workplaces = [
+                            @foreach ($workplaces as $workplace)
+                                "{{ $workplace }}",
+                            @endforeach
+                        ];
+
+                        searchworkplace.addEventListener('input', function () {
+                            const searchValue = this.value.toLowerCase();
+                            const filtered = workplaces.filter(option => option.toLowerCase().includes(searchValue));
+
+                            // Generate HTML for filtered options
+                            const html = filtered.map(option => `<div>${option}</div>`).join('');
+                            selectworkplaces.innerHTML = html;
+
+                            // Show/hide the filtered options container
+                            if (searchValue.length > 0) {
+                                workplaceSelect.style.display = 'block';
+                            } else {
+                                workplaceSelect.style.display = 'none';
+                            }
+                        });
+
+                        // Handle option selection
+                        workplaceSelect.addEventListener('click', function (event) {
+                            if (event.target.tagName === 'DIV') {
+                                searchworkplace.value = event.target.textContent;
+                                workplaceSelect.style.display = 'none';
+                            }
                         });
                     </script>
                 </form>

@@ -59,7 +59,7 @@ class UserController extends Controller
         $selectedrole = "";
         $selectedscnum = "";
         $selectedposition = "All";
-        $selectedworkplace = "";
+        $selectedworkplace = "All";
         $users = User::all();
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
@@ -144,7 +144,7 @@ class UserController extends Controller
         }
 
         if ($request->has('workplace')) {
-            if($request->input('workplace')!=""){
+            if($request->input('workplace')!="All"){
                 $query->where('workplace', $request->input('workplace'));
                 $flag = 1;
             }
