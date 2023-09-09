@@ -140,6 +140,13 @@
 
                     <button type="submit" class="btn btn-primary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Apply Filters</button>
                     <button type="reset" id="customResetButton" class="btn btn-secondary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Reset</button>
+
+                    @php
+                        $serializedUsers = json_encode($users);
+                    @endphp
+
+                    <a href="{{ url('/export-users')}}?users={{ urlencode($serializedUsers) }}" class="btn btn-success" style="margin-left: 10px; margin-top: 15px; width: 170px; height: 40px;">Download Excel</a>
+
                     <script>
                         document.getElementById('customResetButton').addEventListener('click', function() {
                             // Perform the desired action when the reset button is clicked
