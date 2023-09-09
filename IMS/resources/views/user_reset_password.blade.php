@@ -24,15 +24,19 @@
    <div class="main-container d-flex">
     <div class="sidebar " id="side_nav">
          <div class="header-box px-2 pt-3 pb-4 d-flex justify-content-between">
-            <h1 class="fs-3 ms-2 name"><span class="text">Alumna-DCS</span></h1>
+            <h1 class="fs-3 ms-2 name"><span class="text">Allumna-DCS</span></h1>
             <button class="btn d-md-none d-block close-btn px-1 py-0 text-white"><i class="fa-solid fa-bars-staggered"></i></button>
         </div>
 
 
         <ul class="list-unstyled px-2 ">
-            <li class="active"><a href="<?=url('/userhome')?>" class="text-decoration-none px-3 py-3 d-block">HOME</a></li>
-            <li class=""><a href="<?=url('/members')?>" class="text-decoration-none px-3 py-3 d-block">MEMBERS</a></li>
-            <li class=""><a href="<?=url('/user-reset-password')?>" class="text-decoration-none px-3 py-3 d-block">Change Password</a></li>
+            <ul class="list-unstyled px-2 ">
+                <li class=""><a href="<?=url('/userhome')?>" class="text-decoration-none px-3 py-3 d-block">HOME</a></li>
+                <li class=""><a href="<?=url('/members')?>" class="text-decoration-none px-3 py-3 d-block">MEMBERS</a></li>
+                <li class="active"><a href="<?=url('/user-reset-password')?>" class="text-decoration-none px-3 py-3 d-block">Change Password</a></li>
+
+            </ul>
+
 
         </ul>
 
@@ -78,8 +82,56 @@
         </div>
           </nav>
 
-          <br><br>
+          <div class="dashboard-content ms-5 px-3 pt-4">
+            <div class="jumbotron">
+                @if (session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
-          <h1>Welcome {{ auth()->user()->fname }}</h1>
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if (session('mailerror'))
+                    <div class="alert alert-danger">
+                        {{ session('mailerror') }}
+                    </div>
+                @endif
+
+            <form class="form-group" action="<?=url('/update-user-password')?>" method="POST" enctype='multipart/form-data'>
+                    @csrf
+                    <div class="col-sm-6 mb-4">
+                        <label>Old PassWord</label>
+                        <input type="password" class="form-control " name="old_password" style="width: 250px;" required>
+                        @error('old_password')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-4">
+                        <label>New PassWord</label>
+                        <input type="password" class="form-control " name="new_password" style="width: 250px;" required>
+                        @error('new_password')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-4">
+                        <label>Confirm PassWord</label>
+                        <input type="password" class="form-control "  name="new_password_confirmation" style="width: 250px;" required>
+                    </div>
+
+                    <div>
+                        <input type="hidden" name="id" value="{{ auth()->user()->id }}">
+                        <input type="submit" value="Submit" class="btn btn-primary btn-md col-sm-4" style="width: 250px;">
+                    </div>
+
+                </form>
+            </div>
+        </div>
 </body>
 </html>

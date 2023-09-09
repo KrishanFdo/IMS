@@ -39,6 +39,10 @@ Route::get('/login', function () {
     return view('log');
 })->middleware('guest')->name('login');
 
+Route::get('/user-reset-password', function(){
+    return view('user_reset_password');
+})->middleware('web');
+
 Route::post('/register-submit',[RegisterController::class,'register']);
 Route::get('/admin-accept',[RegisterController::class,'admin_accept'])->middleware('auth:webadmin');
 Route::delete('/delete-register',[RegisterController::class,'delete_register'])->middleware('auth:webadmin');
@@ -50,6 +54,7 @@ Route::get('/members',[UserController::class,'members'])->middleware('auth:web')
 Route::delete('/delete-user',[UserController::class,'delete_user'])->middleware('auth:webadmin');
 Route::get('/filtered-users', [UserController::class,'filtered_users'])->middleware('auth:webadmin');
 Route::get('/filtered-members', [UserController::class,'filtered_members'])->middleware('auth:web');
+Route::post('/update-user-password',[UserController::class,'update_user_password'])->middleware('auth:web');
 
 Route::post('/authenticate',[LoginController::class,'authenticate']);
 Route::post('/logout',[LoginController::class,'logout']);
