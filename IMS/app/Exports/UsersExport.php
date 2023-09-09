@@ -45,7 +45,7 @@ class UsersExport implements FromCollection, WithHeadings, WithStyles
             'SC Number',
             'Email',
             'Workplace',
-            'Role',
+            'Degree',
             'Position',
             'Qualifications',
             'Country'
