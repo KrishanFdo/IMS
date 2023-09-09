@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use App\Models\Register;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -9,6 +10,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\RegisterMail;
 use App\Mail\RemoveMail;
+use App\Mail\UserPasswordChange;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\File;
 use Exception;
@@ -246,6 +248,36 @@ class UserController extends Controller
         return view('members',
          compact('users','roles','positions','workplaces','scnums',
          'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
+    }
+
+
+    public function update_user_password(Request $request){
+        $request->validate([
+            'new_password' => 'confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        $id = $request->input('id');
+        $old_password = $request->input('old_password');
+        $new_password = $request->input('new_password');
+
+        if(!Hash::check($old_password,$user->password))
+            return redirect()->back()->with('error', 'Old Password is Incorrect.');
+
+        // $u is the user object used to update password
+        $u = User::find($id);
+        $u->password = Hash::make($new_password);
+
+        try{
+            Mail::to($u->email)->send(new UserPasswordChange($u->fname));
+        }
+        catch(Exception $e){
+            return redirect()->back()->with('mailerror', 'Unsuccessful! Network Error or any other error');
+        }
+        $u->save();
+
+        return redirect()->back()->with('success', 'Password Changed successfully.');
     }
 
 }
