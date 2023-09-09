@@ -60,11 +60,7 @@ Route::post('/authenticate',[LoginController::class,'authenticate']);
 Route::post('/logout',[LoginController::class,'logout']);
 Route::post('/adminlogout',[LoginController::class,'adminlogout']);
 
-Route::get('/emailsend',function(){
-    return view('emailsend');
-})->middleware('auth:webadmin');
-
-
+Route::get('/emailsend',[MailController::class,'emailsend'])->middleware('auth:webadmin');
 Route::post('/sendmail',[MailController::class,'sendmail'])->middleware('auth:webadmin');
 
 Route::get('/export-users',[ExportController::class,'exportFilteredUsers'])->middleware('auth:webadmin');

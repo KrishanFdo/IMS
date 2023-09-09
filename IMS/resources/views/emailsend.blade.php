@@ -98,25 +98,12 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <label style="color: blue">Batch </label>
-                                    <select class="form-select" name="batch">
-                                        <option value="all" selected>All</option>
-                                        <option value="2005">SC/2005</option>
-                                        <option value="2006">SC/2006</option>
-                                        <option value="2007">SC/2007</option>
-                                        <option value="2008">SC/2008</option>
-                                        <option value="2009">SC/2009</option>
-                                        <option value="2010">SC/2010</option>
-                                        <option value="2011">SC/2011</option>
-                                        <option value="2012">SC/2012</option>
-                                        <option value="2013">SC/2013</option>
-                                        <option value="2014">SC/2014</option>
-                                        <option value="2015">SC/2015</option>
-                                        <option value="2016">SC/2016</option>
-                                        <option value="2017">SC/2017</option>
-                                        <option value="2018">SC/2018</option>
-                                        <option value="2019">SC/2019</option>
-                                        <option value="2020">SC/2020</option>
+                                    <label for="batch">Batch</label>
+                                    <select class="form-select" name="batch" style="width: 200px">
+                                        <option value="all">All</option>
+                                        @foreach ($scnums as $scnum)
+                                            <option value="{{ $scnum }}">SC/{{ $scnum }}</option>
+                                        @endforeach
                                     </select>
                                     @error('batch')
                                     <div class="alert alert-danger">Batch is Required</div>

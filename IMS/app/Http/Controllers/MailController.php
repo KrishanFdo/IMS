@@ -88,4 +88,17 @@ class MailController extends Controller
 
         return redirect()->back()->with('success', 'Emails sent successfully');
     }
+
+
+    public function emailsend(){
+        $scnums=[];
+        $scnumbers = User::distinct()->pluck('scnum');
+        foreach($scnumbers as $scnum){
+            $scParts = explode('/', $scnum);
+            if(!in_array($scParts[1],$scnums))
+                array_push($scnums,$scParts[1]);
+        }
+
+        return view('emailsend',compact('scnums'));
+    }
 }
