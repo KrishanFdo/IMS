@@ -146,7 +146,13 @@
                     @endphp
 
                     <a href="{{ url('/export-users')}}?users={{ urlencode($serializedUsers) }}" class="btn btn-success" style="margin-left: 10px; margin-top: 15px; width: 170px; height: 40px;">Download Excel</a>
-
+                    @if(count($users)!=0)
+                        @if(count($users)==1)
+                            <h5 style="margin-top: 10px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($users) }} User Available</h5>
+                        @else
+                            <h5 style="margin-top: 10px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($users) }} Users Available</h5>
+                        @endif
+                    @endif
                     <script>
                         document.getElementById('customResetButton').addEventListener('click', function() {
                             // Perform the desired action when the reset button is clicked
@@ -226,7 +232,6 @@
                     </script>
                 </form>
 
-                <br>
                 <div id="filteredUsers">
                 @foreach($users as $item)
 
