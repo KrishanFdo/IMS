@@ -11,7 +11,7 @@
             <td>
                 <p>
                     Dear {{ $mail_data['user']->fname }},<br>
-                    {{ $mail_data['content'] }}<br>
+                    {!! nl2br($mail_data['content']) !!}<br>
                     Thank You Best Regards!
                 </p>
             </td>
