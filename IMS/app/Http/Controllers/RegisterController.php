@@ -142,10 +142,12 @@ class RegisterController extends Controller
         $selectedscnum = "";
         $selectedposition = "All";
         $selectedworkplace = "All";
+        $selectedcountry = "";
         $data = Register::all();
         $roles = Register::distinct()->pluck('r_role');
         $positions = Register::distinct()->pluck('r_position');
         $workplaces = Register::distinct()->pluck('r_workplace');
+        $countries = Register::distinct()->pluck('r_country');
         $scnums=[];
         $scnumbers = Register::distinct()->pluck('r_scnum');
         foreach($scnumbers as $scnum){
@@ -154,8 +156,8 @@ class RegisterController extends Controller
                 array_push($scnums,$scParts[1]);
         }
         return view('adminaccept',
-         compact('data','roles','positions','workplaces','scnums',
-         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
+         compact('data','roles','positions','workplaces','scnums', 'countries',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace','selectedcountry'));
     }
 
     public function delete_register(Request $request){
@@ -190,6 +192,7 @@ class RegisterController extends Controller
         $selectedscnum = $request->input('scnumber');
         $selectedposition = $request->input('position');
         $selectedworkplace = $request->input('workplace');
+        $selectedcountry = $request->input('country');
 
         if ($request->has('role')) {
             if($request->input('role')!=""){
@@ -212,6 +215,13 @@ class RegisterController extends Controller
             }
         }
 
+        if ($request->has('country')) {
+            if($request->input('country')!=""){
+                $query->where('r_country', $request->input('country'));
+                $flag = 1;
+            }
+        }
+
         // Add more conditions for other filters (position, workplace, qualifications)
 
         $data = $query->get();
@@ -227,6 +237,7 @@ class RegisterController extends Controller
                 $flag = 1;
             }
         }
+
         if($flag==0){
             $data=Register::all();
         }
@@ -241,9 +252,10 @@ class RegisterController extends Controller
         $roles = Register::distinct()->pluck('r_role');
         $positions = Register::distinct()->pluck('r_position');
         $workplaces = Register::distinct()->pluck('r_workplace');
+        $countries = Register::distinct()->pluck('r_country');
         return view('adminaccept',
-         compact('data','roles','positions','workplaces','scnums',
-         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
+         compact('data','roles','positions','workplaces','scnums','countries',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace','selectedcountry'));
     }
 
 }

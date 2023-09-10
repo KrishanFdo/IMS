@@ -107,7 +107,7 @@
                             </select>
                         </div>
                         <div style="margin-left: 10px;">
-                            <label for="role">Role</label>
+                            <label for="role">Degree</label>
                             <select class="form-select" name="role" style="width: 200px">
                                 <option value="">All</option>
                                 @foreach ($roles as $role)
@@ -134,6 +134,19 @@
                                     <!-- Dynamic options will be inserted here -->
                                 </div>
                             </div>
+                        </div>
+
+                    </div>
+                    <div style=" display: flex;">
+
+                        <div style="margin-left: 10px;">
+                            <label for="country">Country</label>
+                            <select class="form-select" name="country" style="width: 200px">
+                                <option value="">All</option>
+                                @foreach ($countries as $country)
+                                    <option value="{{ $country }}" {{ $selectedcountry == $country ? 'selected' : '' }}>{{ $country }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                     </div>
@@ -287,6 +300,7 @@
                                 <p><b>Degree:</b> {{ $item->r_role }}</p>
                                 <p><b>Workplace:</b> {{ $item->r_workplace }}</p>
                                 <p><b>Position:</b> {{ $item->r_position }}</p>
+                                <p><b>Country:</b> {{ $item->r_country }}</p>
                             </div>
                         </div>
                     </div>
