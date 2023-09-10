@@ -144,19 +144,20 @@
                                 @endforeach
                             </select>
                         </div>
+                        @if(count($data)!=0)
+                            @if(count($data)==1)
+                                <h5 style="margin-top: 30px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($data) }} User Available</h5>
+                            @else
+                                <h5 style="margin-top: 30px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($data) }} Users Available</h5>
+                            @endif
+                        @endif
+
+                        <button type="submit" class="btn btn-primary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Apply Filters</button>
+                        <button type="reset" id="customResetButton" class="btn btn-secondary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Reset</button>
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Apply Filters</button>
-                    <button type="reset" id="customResetButton" class="btn btn-secondary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Reset</button>
 
-                    @if(count($data)!=0)
-                        @if(count($data)==1)
-                            <h5 style="margin-top: 10px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($data) }} User Available</h5>
-                        @else
-                            <h5 style="margin-top: 10px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($data) }} Users Available</h5>
-                        @endif
-                    @endif
 
                     <script>
                         document.getElementById('customResetButton').addEventListener('click', function() {
@@ -243,7 +244,7 @@
                         <p>NO USERS AVAILABLE</p>
                     </div>
                 @endif
-
+                <br>
                 @foreach($data as $item)
                 <div class="user-tile">
                     <div class="user-avatar">
@@ -295,13 +296,14 @@
                         <div style="display: flex;">
                             <div>
                                 <p><b>SC-Number:</b> {{ $item->r_scnum }}</p>
+                                <p><b>Degree:</b> {{ $item->r_role }}</p>
                                 <p><b>Email:</b> {{ $item->r_email }}</p>
                                 <p><b>Mobile:</b> {{ $item->r_mobile }}</p>
                                 <p><b>Pass Out Year:</b> {{ $item->r_pyear }}</p>
                             </div>
                             <div style="margin-left: 80px">
-                                <p><b>Degree:</b> {{ $item->r_role }}</p>
                                 <p><b>Workplace:</b> {{ $item->r_workplace }}</p>
+                                <p><b>Employees in Workplace:</b> {{ $item->r_employees }}</p>
                                 <p><b>Position:</b> {{ $item->r_position }}</p>
                                 <p><b>Country:</b> {{ $item->r_country }}</p>
                             </div>

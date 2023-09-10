@@ -24,7 +24,7 @@ class UsersExport implements FromCollection, WithHeadings, WithStyles
         $selectedColumns = collect($this->users)->map(function ($user) {
             return collect($user)->only([
                 'fname', 'lname', 'eyear', 'pyear', 'mobile', 'wmobile', 'scnum', 'email', 'workplace',
-                'role', 'position', 'qualifications', 'country'
+                'role', 'position', 'qualifications', 'country','employees'
             ])->toArray();
         });
 
@@ -48,7 +48,8 @@ class UsersExport implements FromCollection, WithHeadings, WithStyles
             'Degree',
             'Position',
             'Qualifications',
-            'Country'
+            'Country',
+            'Employees in Workplace'
             // Add more field names as needed
         ];
     }
