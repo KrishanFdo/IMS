@@ -62,10 +62,13 @@ class UserController extends Controller
         $selectedscnum = "";
         $selectedposition = "All";
         $selectedworkplace = "All";
+        $selectedcountry = "";
+        $selectedqualification = "";
         $users = User::all();
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
         $workplaces = User::distinct()->pluck('workplace');
+        $countries = User::distinct()->pluck('country');
         $scnums=[];
         $scnumbers = User::distinct()->pluck('scnum');
         foreach($scnumbers as $scnum){
@@ -74,8 +77,8 @@ class UserController extends Controller
                 array_push($scnums,$scParts[1]);
         }
         return view('users',
-         compact('users','roles','positions','workplaces','scnums',
-         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
+         compact('users','roles','positions','workplaces','scnums', 'countries',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace','selectedcountry','selectedqualification'));
     }
 
     public function members(){
@@ -83,10 +86,13 @@ class UserController extends Controller
         $selectedscnum = "";
         $selectedposition = "All";
         $selectedworkplace = "All";
+        $selectedcountry = "";
+        $selectedqualification = "";
         $users = User::all();
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
         $workplaces = User::distinct()->pluck('workplace');
+        $countries = User::distinct()->pluck('country');
         $scnums=[];
         $scnumbers = User::distinct()->pluck('scnum');
         foreach($scnumbers as $scnum){
@@ -95,8 +101,8 @@ class UserController extends Controller
                 array_push($scnums,$scParts[1]);
         }
         return view('members',
-         compact('users','roles','positions','workplaces','scnums',
-         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
+         compact('users','roles','positions','workplaces','scnums', 'countries',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace','selectedcountry','selectedqualification'));
     }
 
     public function delete_user(Request $request){
@@ -130,6 +136,8 @@ class UserController extends Controller
         $selectedscnum = $request->input('scnumber');
         $selectedposition = $request->input('position');
         $selectedworkplace = $request->input('workplace');
+        $selectedcountry = $request->input('country');
+        $selectedqualification = $request->input('qualification');
 
         if ($request->has('role')) {
             if($request->input('role')!=""){
@@ -152,6 +160,13 @@ class UserController extends Controller
             }
         }
 
+        if ($request->has('country')) {
+            if($request->input('country')!=""){
+                $query->where('country', $request->input('country'));
+                $flag = 1;
+            }
+        }
+
         // Add more conditions for other filters (position, workplace, qualifications)
 
         $users = $query->get();
@@ -167,6 +182,25 @@ class UserController extends Controller
                 $flag = 1;
             }
         }
+
+        if ($request->has('qualification')) {
+            if($request->input('qualification')!=""){
+                foreach($users as $key=>$user){
+                    if(empty($user['qualifications'])){
+                        unset($users[$key]);
+                    }
+                    else{
+                        $qualifications = explode(',', $user['qualifications']);
+                        if(!in_array($selectedqualification, $qualifications)){
+                            unset($users[$key]);
+                        }
+                    }
+
+                }
+                $flag = 1;
+            }
+        }
+
         if($flag==0){
             $users=User::all();
         }
@@ -181,9 +215,10 @@ class UserController extends Controller
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
         $workplaces = User::distinct()->pluck('workplace');
+        $countries = User::distinct()->pluck('country');
         return view('users',
-         compact('users','roles','positions','workplaces','scnums',
-         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
+         compact('users','roles','positions','workplaces','scnums','countries',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace','selectedcountry','selectedqualification'));
     }
 
     public function filtered_members(Request $request)
@@ -195,6 +230,8 @@ class UserController extends Controller
         $selectedscnum = $request->input('scnumber');
         $selectedposition = $request->input('position');
         $selectedworkplace = $request->input('workplace');
+        $selectedcountry = $request->input('country');
+        $selectedqualification = $request->input('qualification');
 
         if ($request->has('role')) {
             if($request->input('role')!=""){
@@ -217,6 +254,13 @@ class UserController extends Controller
             }
         }
 
+        if ($request->has('country')) {
+            if($request->input('country')!=""){
+                $query->where('country', $request->input('country'));
+                $flag = 1;
+            }
+        }
+
         // Add more conditions for other filters (position, workplace, qualifications)
 
         $users = $query->get();
@@ -232,6 +276,25 @@ class UserController extends Controller
                 $flag = 1;
             }
         }
+
+        if ($request->has('qualification')) {
+            if($request->input('qualification')!=""){
+                foreach($users as $key=>$user){
+                    if(empty($user['qualifications'])){
+                        unset($users[$key]);
+                    }
+                    else{
+                        $qualifications = explode(',', $user['qualifications']);
+                        if(!in_array($selectedqualification, $qualifications)){
+                            unset($users[$key]);
+                        }
+                    }
+
+                }
+                $flag = 1;
+            }
+        }
+
         if($flag==0){
             $users=User::all();
         }
@@ -245,9 +308,10 @@ class UserController extends Controller
         $roles = User::distinct()->pluck('role');
         $positions = User::distinct()->pluck('position');
         $workplaces = User::distinct()->pluck('workplace');
+        $countries = User::distinct()->pluck('country');
         return view('members',
-         compact('users','roles','positions','workplaces','scnums',
-         'selectedrole','selectedscnum','selectedposition','selectedworkplace'));
+         compact('users','roles','positions','workplaces','scnums','countries',
+         'selectedrole','selectedscnum','selectedposition','selectedworkplace','selectedcountry','selectedqualification'));
     }
 
 

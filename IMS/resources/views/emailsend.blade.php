@@ -98,7 +98,7 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <label for="batch">Batch</label>
+                                    <label for="batch" style="color: blue">Batch</label>
                                     <select class="form-select" name="batch" style="width: 200px">
                                         <option value="all">All</option>
                                         @foreach ($scnums as $scnum)
@@ -113,7 +113,7 @@
                                 <tr>
 
                                <td>
-                                <label style="color: blue">Role </label><br>
+                                <label style="color: blue">Degree </label><br>
                                 <input type="radio" id="role" name="role" value="BCS General"/> BCS General
                                 <br>
                                 <input type="radio" id="role" name="role" value="BCS Special"/> BCS Special

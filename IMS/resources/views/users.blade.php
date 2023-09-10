@@ -89,11 +89,7 @@
                         {{ session('mailerror') }}
                     </div>
                 @endif
-                @if($users->isEmpty())
-                    <div class="alert alert-danger">
-                        <p>NO USERS AVAILABLE</p>
-                    </div>
-                @endif
+
                 <br>
                 <form style="margin-left: 5px;" class="form-group" action="<?=url('/filtered-users')?>" method="GET">
                     <div style=" display: flex;">
@@ -107,7 +103,7 @@
                             </select>
                         </div>
                         <div style="margin-left: 10px;">
-                            <label for="role">Role</label>
+                            <label for="role">Degree</label>
                             <select class="form-select" name="role" style="width: 200px">
                                 <option value="">All</option>
                                 @foreach ($roles as $role)
@@ -134,6 +130,33 @@
                                     <!-- Dynamic options will be inserted here -->
                                 </div>
                             </div>
+                        </div>
+
+                    </div>
+
+                    <div style=" display: flex;">
+
+                        <div style="">
+                            <label for="qualification">Qualification</label>
+                            <select class="form-select" name="qualification" style="width: 200px">
+                                <option value="">All</option>
+                                <option value="MSc Reading" {{ $selectedqualification == 'MSc Reading' ? 'selected' : '' }}>MSc Reading</option>
+                                <option value="Msc" {{ $selectedqualification == 'Msc' ? 'selected' : '' }}>MSc</option>
+                                <option value="MPhil Reading" {{ $selectedqualification == 'MPhil Reading' ? 'selected' : '' }}>MPhil Reading</option>
+                                <option value="MPhil" {{ $selectedqualification == 'MPhil' ? 'selected' : '' }}>MPhil</option>
+                                <option value="Phd Reading" {{ $selectedqualification == 'Phd Reading' ? 'selected' : '' }}>Phd Reading</option>
+                                <option value="Phd" {{ $selectedqualification == 'Phd' ? 'selected' : '' }}>Phd</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-left: 10px;">
+                            <label for="country">Country</label>
+                            <select class="form-select" name="country" style="width: 200px">
+                                <option value="">All</option>
+                                @foreach ($countries as $country)
+                                    <option value="{{ $country }}" {{ $selectedcountry == $country ? 'selected' : '' }}>{{ $country }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                     </div>
@@ -231,6 +254,13 @@
                         });
                     </script>
                 </form>
+
+                @if($users->isEmpty())
+                    <br>
+                    <div class="alert alert-danger">
+                        <p>NO USERS AVAILABLE</p>
+                    </div>
+                @endif
 
                 <div id="filteredUsers">
                 @foreach($users as $item)

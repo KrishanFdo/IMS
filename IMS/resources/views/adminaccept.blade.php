@@ -89,11 +89,7 @@
                         {{ session('mailerror') }}
                     </div>
                 @endif
-                @if($data->isEmpty())
-                    <div class="alert alert-danger">
-                        <p>NO USERS AVAILABLE</p>
-                    </div>
-                @endif
+
                 <br>
                 <form style="margin-left: 5px;" class="form-group" action="<?=url('/filtered-registers')?>" method="GET">
                     <div style=" display: flex;">
@@ -107,7 +103,7 @@
                             </select>
                         </div>
                         <div style="margin-left: 10px;">
-                            <label for="role">Role</label>
+                            <label for="role">Degree</label>
                             <select class="form-select" name="role" style="width: 200px">
                                 <option value="">All</option>
                                 @foreach ($roles as $role)
@@ -134,6 +130,19 @@
                                     <!-- Dynamic options will be inserted here -->
                                 </div>
                             </div>
+                        </div>
+
+                    </div>
+                    <div style=" display: flex;">
+
+                        <div style="">
+                            <label for="country">Country</label>
+                            <select class="form-select" name="country" style="width: 200px">
+                                <option value="">All</option>
+                                @foreach ($countries as $country)
+                                    <option value="{{ $country }}" {{ $selectedcountry == $country ? 'selected' : '' }}>{{ $country }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                     </div>
@@ -228,6 +237,13 @@
                     </script>
                 </form>
 
+                @if($data->isEmpty())
+                    <br>
+                    <div class="alert alert-danger">
+                        <p>NO USERS AVAILABLE</p>
+                    </div>
+                @endif
+
                 @foreach($data as $item)
                 <div class="user-tile">
                     <div class="user-avatar">
@@ -287,6 +303,7 @@
                                 <p><b>Degree:</b> {{ $item->r_role }}</p>
                                 <p><b>Workplace:</b> {{ $item->r_workplace }}</p>
                                 <p><b>Position:</b> {{ $item->r_position }}</p>
+                                <p><b>Country:</b> {{ $item->r_country }}</p>
                             </div>
                         </div>
                     </div>
