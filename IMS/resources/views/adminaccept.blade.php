@@ -139,7 +139,7 @@
                     </div>
                     <div style=" display: flex;">
 
-                        <div style="margin-left: 10px;">
+                        <div style="">
                             <label for="country">Country</label>
                             <select class="form-select" name="country" style="width: 200px">
                                 <option value="">All</option>
