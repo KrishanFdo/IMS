@@ -89,11 +89,7 @@
                         {{ session('mailerror') }}
                     </div>
                 @endif
-                @if($data->isEmpty())
-                    <div class="alert alert-danger">
-                        <p>NO USERS AVAILABLE</p>
-                    </div>
-                @endif
+
                 <br>
                 <form style="margin-left: 5px;" class="form-group" action="<?=url('/filtered-registers')?>" method="GET">
                     <div style=" display: flex;">
@@ -240,6 +236,13 @@
                         });
                     </script>
                 </form>
+
+                @if($data->isEmpty())
+                    <br>
+                    <div class="alert alert-danger">
+                        <p>NO USERS AVAILABLE</p>
+                    </div>
+                @endif
 
                 @foreach($data as $item)
                 <div class="user-tile">
