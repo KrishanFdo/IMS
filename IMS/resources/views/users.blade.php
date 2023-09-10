@@ -312,6 +312,7 @@
                         <div style="margin-left: 80px">
                         <p><b>Degree:</b> {{ $item->role }}</p>
                         <p><b>Workplace:</b> {{ $item->workplace }}</p>
+                        <p><b>Employees in Workplace:</b> {{ $item->employees }}</p>
                         <p><b>Position:</b> {{ $item->position }}</p>
                         <p><b>Extra Qualifications:</b> {{ $item->qualifications }}</p>
                         <p><b>Country:</b> {{ $item->country }}</p>

@@ -54,7 +54,8 @@ class RegisterController extends Controller
             'role'=>'required',
             'position'=>'required',
             'country'=>'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'employees'=>'required'
         ]);
 
         $fname = $request->input("fname");
@@ -69,6 +70,7 @@ class RegisterController extends Controller
         $role = $request->input("role");
         $qualifications = $request->input("qualifications");
         $country = $request->input("country");
+        $employees = $request->input("employees");
 
         if($request->input("position")=="Other")
             $position = $request->input("other-position");
@@ -106,6 +108,7 @@ class RegisterController extends Controller
         $registers->r_qualifications = $qualifications;
         $registers->r_country = $country;
         $registers->r_imgpath = $imgpath;
+        $registers->r_employees = $employees;
         $registers->save();
 
         try{

@@ -296,13 +296,14 @@
                         <div style="display: flex;">
                             <div>
                                 <p><b>SC-Number:</b> {{ $item->r_scnum }}</p>
+                                <p><b>Degree:</b> {{ $item->r_role }}</p>
                                 <p><b>Email:</b> {{ $item->r_email }}</p>
                                 <p><b>Mobile:</b> {{ $item->r_mobile }}</p>
                                 <p><b>Pass Out Year:</b> {{ $item->r_pyear }}</p>
                             </div>
                             <div style="margin-left: 80px">
-                                <p><b>Degree:</b> {{ $item->r_role }}</p>
                                 <p><b>Workplace:</b> {{ $item->r_workplace }}</p>
+                                <p><b>Employees in Workplace:</b> {{ $item->r_employees }}</p>
                                 <p><b>Position:</b> {{ $item->r_position }}</p>
                                 <p><b>Country:</b> {{ $item->r_country }}</p>
                             </div>

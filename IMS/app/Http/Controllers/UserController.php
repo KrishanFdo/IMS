@@ -42,6 +42,7 @@ class UserController extends Controller
         $user->country = $u->r_country;
         $user->imgpath = $u->r_imgpath;
         $user->password = Hash::make($mail_data['password']);
+        $user->employees = $u->r_employees;
         $user->save();
         try{
             Mail::to($user->email)->send(new RegisterMail($mail_data));
