@@ -245,7 +245,7 @@
                             <option value="50-100">50-100</option>
                             <option value="100-200">100-200</option>
                             <option value="200-500">200-500</option>
-                            <option value="> 500">More than 500</option>
+                            <option value="More than 500">More than 500</option>
                         </select>
                         @error('employees')
                             <div class="alert alert-danger">{{ $message }}</div>
