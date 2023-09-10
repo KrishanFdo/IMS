@@ -147,18 +147,18 @@
                             </select>
                         </div>
 
+                        @if(count($users)!=0)
+                            @if(count($users)==1)
+                                <h5 style="margin-top: 30px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($users) }} Member Available</h5>
+                            @else
+                                <h5 style="margin-top: 30px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($users) }} Members Available</h5>
+                            @endif
+                        @endif
+
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Apply Filters</button>
                     <button type="reset" id="customResetButton" class="btn btn-secondary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Reset</button>
-
-                    @if(count($users)!=0)
-                        @if(count($users)==1)
-                            <h5 style="margin-top: 10px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($users) }} Member Available</h5>
-                        @else
-                            <h5 style="margin-top: 10px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($users) }} Members Available</h5>
-                        @endif
-                    @endif
 
                     <script>
                         document.getElementById('customResetButton').addEventListener('click', function() {
