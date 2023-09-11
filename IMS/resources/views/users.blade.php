@@ -173,7 +173,10 @@
                     <button type="reset" id="customResetButton" class="btn btn-secondary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Reset</button>
 
                     @php
-                        $serializedUsers = json_encode($users);
+                        $data = ['selectedscnum'=>$selectedscnum,'selectedrole'=>$selectedrole,'selectedposition'=>$selectedposition,
+                                 'selectedworkplace'=>$selectedworkplace,'selectedqualification'=>$selectedqualification,
+                                 'selectedcountry'=>$selectedcountry];
+                        $serializedUsers = json_encode($data);
                     @endphp
 
                     <a href="{{ url('/export-users')}}?users={{ urlencode($serializedUsers) }}" class="btn btn-success" style="margin-left: 10px; margin-top: 20px; width: 170px; height: 40px;">Download Excel</a>
