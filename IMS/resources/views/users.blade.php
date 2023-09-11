@@ -173,7 +173,10 @@
                     <button type="reset" id="customResetButton" class="btn btn-secondary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Reset</button>
 
                     @php
-                        $serializedUsers = json_encode($users);
+                        $data = ['selectedscnum'=>$selectedscnum,'selectedrole'=>$selectedrole,'selectedposition'=>$selectedposition,
+                                 'selectedworkplace'=>$selectedworkplace,'selectedqualification'=>$selectedqualification,
+                                 'selectedcountry'=>$selectedcountry];
+                        $serializedUsers = json_encode($data);
                     @endphp
 
                     <a href="{{ url('/export-users')}}?users={{ urlencode($serializedUsers) }}" class="btn btn-success" style="margin-left: 10px; margin-top: 20px; width: 170px; height: 40px;">Download Excel</a>
@@ -190,6 +193,7 @@
 
                         //list of options
                         const positions = [
+                            "All",
                             @foreach ($positions as $position)
                                 "{{ $position }}",
                             @endforeach
@@ -207,7 +211,9 @@
                             if (searchValue.length > 0) {
                                 positionSelect.style.display = 'block';
                             } else {
-                                positionSelect.style.display = 'none';
+                                positionSelect.style.display = 'block';
+                                // If search box is empty, show all positions
+                                selectpositions.innerHTML = positions.map(option => `<div>${option}</div>`).join('');
                             }
                         });
 
@@ -219,6 +225,15 @@
                             }
                         });
 
+                       /* // Set the default value to "All" when the cursor is not in the search box
+                        searchposition.addEventListener('blur', function () {
+                            if (this.value === '') {
+                                this.value = 'All';
+                            }
+                        }); */
+
+
+
                         //serach workplaces
                         const searchworkplace = document.getElementById('workplace');
                         const workplaceSelect = document.getElementById('workplace-select');
@@ -226,6 +241,7 @@
 
                         //list of options
                         const workplaces = [
+                            "All",
                             @foreach ($workplaces as $workplace)
                                 "{{ $workplace }}",
                             @endforeach
@@ -243,9 +259,18 @@
                             if (searchValue.length > 0) {
                                 workplaceSelect.style.display = 'block';
                             } else {
-                                workplaceSelect.style.display = 'none';
+                                workplaceSelect.style.display = 'block';
+                                // If search box is empty, show all workplaces
+                                selectworkplaces.innerHTML = workplaces.map(option => `<div>${option}</div>`).join('');
                             }
                         });
+
+                        /*// Set the default value to "All" when the cursor is not in the search box
+                        searchworkplace.addEventListener('blur', function () {
+                            if (this.value === '') {
+                                this.value = 'All';
+                            }
+                        });*/
 
                         // Handle option selection
                         workplaceSelect.addEventListener('click', function (event) {

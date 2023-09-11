@@ -171,6 +171,7 @@
 
                         //list of options
                         const positions = [
+                            "All",
                             @foreach ($positions as $position)
                                 "{{ $position }}",
                             @endforeach
@@ -188,7 +189,9 @@
                             if (searchValue.length > 0) {
                                 positionSelect.style.display = 'block';
                             } else {
-                                positionSelect.style.display = 'none';
+                                positionSelect.style.display = 'block';
+                                // If search box is empty, show all positions
+                                selectpositions.innerHTML = positions.map(option => `<div>${option}</div>`).join('');
                             }
                         });
 
@@ -207,6 +210,7 @@
 
                         //list of options
                         const workplaces = [
+                            "All",
                             @foreach ($workplaces as $workplace)
                                 "{{ $workplace }}",
                             @endforeach
@@ -224,7 +228,9 @@
                             if (searchValue.length > 0) {
                                 workplaceSelect.style.display = 'block';
                             } else {
-                                workplaceSelect.style.display = 'none';
+                                workplaceSelect.style.display = 'block';
+                                // If search box is empty, show all workplaces
+                                selectworkplaces.innerHTML = workplaces.map(option => `<div>${option}</div>`).join('');
                             }
                         });
 
