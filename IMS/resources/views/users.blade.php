@@ -193,6 +193,7 @@
 
                         //list of options
                         const positions = [
+                            "All",
                             @foreach ($positions as $position)
                                 "{{ $position }}",
                             @endforeach
@@ -210,7 +211,9 @@
                             if (searchValue.length > 0) {
                                 positionSelect.style.display = 'block';
                             } else {
-                                positionSelect.style.display = 'none';
+                                positionSelect.style.display = 'block';
+                                // If search box is empty, show all positions
+                                selectpositions.innerHTML = positions.map(option => `<div>${option}</div>`).join('');
                             }
                         });
 
@@ -222,6 +225,15 @@
                             }
                         });
 
+                       /* // Set the default value to "All" when the cursor is not in the search box
+                        searchposition.addEventListener('blur', function () {
+                            if (this.value === '') {
+                                this.value = 'All';
+                            }
+                        }); */
+
+
+
                         //serach workplaces
                         const searchworkplace = document.getElementById('workplace');
                         const workplaceSelect = document.getElementById('workplace-select');
@@ -229,6 +241,7 @@
 
                         //list of options
                         const workplaces = [
+                            "All",
                             @foreach ($workplaces as $workplace)
                                 "{{ $workplace }}",
                             @endforeach
@@ -246,9 +259,18 @@
                             if (searchValue.length > 0) {
                                 workplaceSelect.style.display = 'block';
                             } else {
-                                workplaceSelect.style.display = 'none';
+                                workplaceSelect.style.display = 'block';
+                                // If search box is empty, show all workplaces
+                                selectworkplaces.innerHTML = workplaces.map(option => `<div>${option}</div>`).join('');
                             }
                         });
+
+                        /*// Set the default value to "All" when the cursor is not in the search box
+                        searchworkplace.addEventListener('blur', function () {
+                            if (this.value === '') {
+                                this.value = 'All';
+                            }
+                        });*/
 
                         // Handle option selection
                         workplaceSelect.addEventListener('click', function (event) {
