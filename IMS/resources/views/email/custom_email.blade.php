@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Custom Email</title>
+    <title>Alumna-DCS | Email</title>
 </head>
 
 <body>
