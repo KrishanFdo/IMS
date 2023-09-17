@@ -31,14 +31,14 @@ class RegisterController extends Controller
 
         Validator::extend('mobile', function ($attribute, $value, $parameters, $validator) {
             // Define the pattern for the custom code (SC/Year/Digits)
-            $pattern = '/^\+94\d{9}$/';
-            $pattern2 = '/^0\d{9}$/';
+            $pattern = '/^0/';
+            //$pattern2 = '/^0\d{9}$/';
             // Use preg_match to check if the value matches the pattern
-            return preg_match($pattern, $value) || preg_match($pattern2, $value);
+            return !preg_match($pattern, $value);
         });
 
         Validator::replacer('mobile', function ($message, $attribute, $rule, $parameters) {
-            return str_replace(':attribute', $attribute, 'Invalid format. Correct format is "+94XXXXXXXXX".');
+            return str_replace(':attribute', $attribute, 'Can not have a leading zero.');
         });
 
        $request->validate([
@@ -46,8 +46,10 @@ class RegisterController extends Controller
             'lname'=>'required',
             'eyear'=>'required|numeric|digits:4',
             'pyear'=>'required|numeric|digits:4',
-            'mobile'=>'required|mobile',
-            'wmobile'=>'required|mobile',
+            'c_mobile'=>'required',
+            'w_mobile'=>'required',
+            'mobile'=>'required|numeric|digits_between:7,15|mobile',
+            'wmobile'=>'required|numeric|digits_between:7,15|mobile',
             "scnum"=>'required|scnumber|unique:registers,r_scnum|unique:users,scnum',
             'email' => 'required|email|unique:registers,r_email|unique:users,email',
             'workplace'=>'required',
@@ -62,8 +64,8 @@ class RegisterController extends Controller
         $lname = $request->input("lname");
         $eyear = $request->input("eyear");
         $pyear = $request->input("pyear");
-        $mobile = $request->input("mobile");
-        $wmobile = $request->input("wmobile");
+        $mobile = "+".$request->input("c_mobile").$request->input("mobile");
+        $wmobile = "+".$request->input("w_mobile").$request->input("wmobile");
         $scnum = $request->input("scnum");
         $email = $request->input("email");
         $workplace = $request->input("workplace");
