@@ -66,35 +66,35 @@
 
                 <div class="row jumbotron">
                   <div class="col-sm-6 mb-4">
-                    <label>First Name</label>
+                    <label style="color: blue;">First Name</label>
                     <input type="text" class="form-control " name="fname">
                     @error('fname')
                     <div class="alert alert-danger">{{ $message }}</div>
                   @enderror
                   </div>
                   <div class="col-sm-6 mb-4">
-                    <label>Last Name</label>
+                    <label style="color: blue;">Last Name</label>
                     <input type="text" class="form-control " name="lname">
                     @error('lname')
                     <div class="alert alert-danger">{{ $message }}</div>
                  @enderror
                   </div>
                   <div class="col-sm-6 mb-4">
-                    <label>Entered Year to the university</label>
+                    <label style="color: blue;">Entered Year to the university</label>
                     <input type="text" class="form-control " placeholder="****" name="eyear">
                     @error('eyear')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="col-sm-6 mb-4">
-                    <label> Pass Out Year </label>
+                    <label style="color: blue;"> Pass Out Year </label>
                     <input type="text" class="form-control " placeholder="****" name="pyear">
                     @error('pyear')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                   </div>
                   <div class="col-sm-6 mb-4">
-                    <label>  Phone number </label>
+                    <label style="color: blue;">  Phone Number </label>
                     <!-- Country names and Phone Code -->
                     <div style="display: flex;">
                     <select class="form-select" id="c_mobile" name="c_mobile" style="width: 30%;">
@@ -363,7 +363,7 @@
                     </div>
                   </div>
                   <div class="col-sm-6 mb-4">
-                    <label>Whatsapp number </label>
+                    <label style="color: blue;">Whatsapp Number </label>
                     <div style="display: flex;">
                         <select class="form-select" id="w_mobile" name="w_mobile" style="width: 30%;">
                             <option value="" disabled selected>Country</option>
@@ -632,14 +632,14 @@
                     </div>
                   </div>
                   <div class="col-sm-6 mb-4">
-                  <label> SC number </label>
+                  <label style="color: blue;"> SC Number </label>
                     <input type="text" class="form-control" placeholder="SC/20**/*****" name="scnum">
                     @error('scnum')
                         <div class="alert alert-danger">{{ $message }}</div>
                      @enderror
                   </div>
                   <div class="col-sm-6 mb-4">
-                    <label>Email</label>
+                    <label style="color: blue;">Email</label>
                     <input type="text" class="form-control" placeholder="Email address" name="email" >
                     @error('email')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -648,7 +648,7 @@
                   </div>
                   <div class="col-sm-6 mb-4">
                   <div class="col-sm-6 mb-4">
-                          <label>Role</label>  <br>
+                          <label style="color: blue;">Role</label>  <br>
                     <div>   <input type="radio" id="role" name="role" value="BCS General"/> BCS General
                           <br>
                           <input type="radio" id="role" name="role" value="BCS Special"/> BCS Special
@@ -664,7 +664,7 @@
                 </div>
                   <div class="col-sm-6 mb-4">
 
-                    <label class="mt-2">Position</label>
+                    <label class="mt-2" style="color: blue;">Position</label>
                     <select class="form-select" aria-label="" name="position" id="select_list">
                       <option value="" disabled selected>Select an option...</option>
                       <option value="Lecturer">Lecturer</option>
@@ -713,7 +713,7 @@
 
                 <div id="hidden_html_tag" class="col-sm-6 mb-4" style="display: none;">
                     <div class="col-sm-6 mb-4">
-                      <label>Other Position</label>
+                      <label style="color: blue;">Other Position</label>
                       <input type="text" class="form-control" placeholder="Position" name="other-position" required>
                      <br>
                      </div>
@@ -722,7 +722,7 @@
 
                   </div>
                   <div class="col-sm-6 mb-4">
-                    <label>Extra Qualifications</label><br>
+                    <label style="color: blue;">Extra Qualifications</label><br>
                     <div class="form-check form-check-inline">
                       <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Msc" name="qualifications[]">
                       <label class="form-check-label" for="inlineCheckbox1">Msc</label>
@@ -755,14 +755,14 @@
 
                   <div class="col-sm-6 mb-4">
                     <div class="col-sm-6 mb-4">
-                        <label>Work Place</label>
+                        <label style="color: blue;">Work Place</label>
                         <input type="text" class="form-control" placeholder="Virtusa/ifs/any" name="workplace">
                         @error('workplace')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                         <br>
 
-                        <label for="employees">Employees in Workplace</label>
+                        <label for="employees" style="color: blue;">Employees in Workplace</label>
                         <select class="form-select" name="employees">
                             <option value="" disabled selected>Select</option>
                             <option value="0-50">0-50</option>
@@ -778,7 +778,7 @@
                   </div>
                   <div class="col-sm-6 mb-4">
                      <div class="col-sm-6 mb-4">
-                     <label>Country where you live</label>
+                     <label style="color: blue;">Country where you live</label>
                      <select name="country">
                         <option value="Afghanistan">Afghanistan</option>
                         <option value="Albania">Albania</option>
@@ -1028,7 +1028,7 @@
                   </div>
 
                   <div class="col-sm-6 mb-4">
-                  <label>Profile photo</label>
+                  <label style="color: blue;">Profile Photo</label>
                       <div class="form-group">
                         <input class="form-control" type="file" name="image" value="" />
                         @error('image')
