@@ -351,7 +351,7 @@
                         <option value="260">Zambia +260</option>
                         <option value="263">Zimbabwe +263</option>
                     </select>
-                    <input type="text" class="form-control " placeholder="Enter Number without leading 0, Spaces and -" name="mobile">
+                    <input type="text" class="form-control " placeholder="Enter Number without leading 0" name="mobile">
                 </div>
                     <div style="display:flex">
                     @error('c_mobile')
@@ -620,7 +620,7 @@
                             <option value="263">Zimbabwe +263</option>
                         </select>
 
-                        <input type="text" class="form-control " placeholder="Enter Number without leading 0, Spaces and -" name="wmobile">
+                        <input type="text" class="form-control " placeholder="Enter Number without leading 0" name="wmobile">
                     </div>
                     <div style="display: flex">
                     @error('w_mobile')
