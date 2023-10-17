@@ -47,7 +47,7 @@
             <button class="btn px-1 py-0 open-btn me-2"><i class="fa-solid fa-bars-staggered"></i></button>
             <a class="navbar-brand fs-4" href="#"></a>
             </div>
-            <button class="navbar-toggler p-0 border-0 " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler p-0 border-0 " type="button" onclick="toggleContent()">
 
                 <i class="fa-solid fa-bars"></i>
             </button>
@@ -76,6 +76,12 @@
 
               </ul>
             </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+            function toggleContent() {
+                $('#navbarSupportedContent').toggleClass('show');
+            }
+            </script>
         </div>
           </nav>
 
@@ -91,20 +97,20 @@
                 @endif
 
                 <br>
-                <form style="margin-left: 5px;" class="form-group" action="<?=url('/filtered-users')?>" method="GET">
+                <form style="margin-left: 0.5%;" class="form-group" action="<?=url('/filtered-users')?>" method="GET">
                     <div style=" display: flex;">
                         <div>
                             <label for="scnumber">Batch</label>
-                            <select class="form-select" name="scnumber" style="width: 200px">
+                            <select class="form-select" name="scnumber">
                                 <option value="">All</option>
                                 @foreach ($scnums as $scnum)
                                     <option value="{{ $scnum }}" {{ $selectedscnum == $scnum ? 'selected' : '' }}>SC/{{ $scnum }}</option>
                                 @endforeach
                             </select>
                         </div>
-                        <div style="margin-left: 10px;">
+                        <div style="margin-left: 1%;">
                             <label for="role">Degree</label>
-                            <select class="form-select" name="role" style="width: 200px">
+                            <select class="form-select" name="role">
                                 <option value="">All</option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role }}" {{ $selectedrole == $role ? 'selected' : '' }}>{{ $role }}</option>
@@ -112,9 +118,9 @@
                             </select>
                         </div>
 
-                        <div style="margin-left: 10px;">
+                        <div style="margin-left: 1%;">
                             <label for="position">Position</label>
-                            <input type="text" class="form-control" id="position" name="position" style="width: 200px" value="{{ $selectedposition }}">
+                            <input type="text" class="form-control" id="position" name="position" value="{{ $selectedposition }}">
                             <div class="position-select" id="position-select">
                                 <div class="select-positions">
                                     <!-- Dynamic options will be inserted here -->
@@ -122,9 +128,9 @@
                             </div>
                         </div>
 
-                        <div style="margin-left: 10px;">
+                        <div style="margin-left: 1%;">
                             <label for="workplace">Workplace</label>
-                            <input type="text" class="form-control" id="workplace" name="workplace" style="width: 200px" value="{{ $selectedworkplace }}">
+                            <input type="text" class="form-control" id="workplace" name="workplace" value="{{ $selectedworkplace }}">
                             <div class="workplace-select" id="workplace-select">
                                 <div class="select-workplaces">
                                     <!-- Dynamic options will be inserted here -->
@@ -138,7 +144,7 @@
 
                         <div style="">
                             <label for="qualification">Qualification</label>
-                            <select class="form-select" name="qualification" style="width: 200px">
+                            <select class="form-select" name="qualification">
                                 <option value="">All</option>
                                 <option value="MSc Reading" {{ $selectedqualification == 'MSc Reading' ? 'selected' : '' }}>MSc Reading</option>
                                 <option value="Msc" {{ $selectedqualification == 'Msc' ? 'selected' : '' }}>MSc</option>
@@ -149,9 +155,9 @@
                             </select>
                         </div>
 
-                        <div style="margin-left: 10px;">
+                        <div style="margin-left: 1%;">
                             <label for="country">Country</label>
-                            <select class="form-select" name="country" style="width: 200px">
+                            <select class="form-select" name="country" >
                                 <option value="">All</option>
                                 @foreach ($countries as $country)
                                     <option value="{{ $country }}" {{ $selectedcountry == $country ? 'selected' : '' }}>{{ $country }}</option>
@@ -160,17 +166,17 @@
                         </div>
                         @if(count($users)!=0)
                             @if(count($users)==1)
-                                <h5 style="margin-top: 30px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($users) }} User Available</h5>
+                                <h5 style="margin-top: 3%; margin-left: 1%; color:rgba(189, 61, 10, 0.925)">{{ count($users) }} User Available</h5>
                             @else
-                                <h5 style="margin-top: 30px; margin-left: 10px; color:rgba(189, 61, 10, 0.925)">{{ count($users) }} Users Available</h5>
+                                <h5 style="margin-top: 3%; margin-left: 1%; color:rgba(189, 61, 10, 0.925)">{{ count($users) }} Users Available</h5>
                             @endif
                         @endif
 
 
                     </div>
 
-                    <button type="submit" class="btn btn-primary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Apply Filters</button>
-                    <button type="reset" id="customResetButton" class="btn btn-secondary btn-md col-sm-4" style="width: 150px; height: 40px; margin-left: 10px; margin-top: 20px;">Reset</button>
+                    <button type="submit" class="btn btn-primary btn-md col-sm-4" style="width: 15%; height: 5%; margin-left: 1%; margin-top: 2.1%;">Apply Filters</button>
+                    <button type="reset" id="customResetButton" class="btn btn-secondary btn-md col-sm-4" style="width: 15%; height: 5%; margin-left: 1%; margin-top: 2%;">Reset</button>
 
                     @php
                         $data = ['selectedscnum'=>$selectedscnum,'selectedrole'=>$selectedrole,'selectedposition'=>$selectedposition,
@@ -179,7 +185,7 @@
                         $serializedUsers = json_encode($data);
                     @endphp
 
-                    <a href="{{ url('/export-users')}}?users={{ urlencode($serializedUsers) }}" class="btn btn-success" style="margin-left: 10px; margin-top: 20px; width: 170px; height: 40px;">Download Excel</a>
+                    <a href="{{ url('/export-users')}}?users={{ urlencode($serializedUsers) }}" class="btn btn-success" style="margin-left: 1%; margin-top: 2%; width: 15%; height: 5%;">Download Excel</a>
 
                     <script>
                         document.getElementById('customResetButton').addEventListener('click', function() {
@@ -297,10 +303,10 @@
                     <div class="user-avatar">
                         <div style="display: flex;">
                         <img src="{{ asset('storage/'.$item->imgpath) }}" alt="User Avatar">
-                        <div style=" margin-top: 40px; margin-left: 10px">
+                        <div style="margin-top: 4%; margin-left: 1%">
                             <h4 style="color: blue;">{{ $item->fname }} {{ $item->lname }}</h4>
                         </div>
-                        <div style="float:right; margin-top: 30px; margin-right: 30px; margin-left: 30px;">
+                        <div style="float:right; margin-top: 2.5%; margin-right: 1%;">
                             <div class="container">
                                 <form id="{{ $item->id }}" action="<?=url('/delete-user')?>" method="post">
                                     @csrf
@@ -334,7 +340,7 @@
                         <p><b>Entered Year:</b> {{ $item->eyear }}</p>
                         <p><b>Pass Out Year:</b> {{ $item->pyear }}</p>
                         </div>
-                        <div style="margin-left: 80px">
+                        <div style="margin-left: 10%">
                         <p><b>Degree:</b> {{ $item->role }}</p>
                         <p><b>Workplace:</b> {{ $item->workplace }}</p>
                         <p><b>Employees in Workplace:</b> {{ $item->employees }}</p>
